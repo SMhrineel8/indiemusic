@@ -1,73 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Indiemusic - Discover New Artists</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Indiemusic – Discover New Artists</title>
+  <!-- TailwindCSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
+<body class="bg-gradient-to-tr from-white to-blue-50 text-gray-900">
 
-<body class="bg-gray-50 text-gray-900">
   <!-- Navbar -->
   <nav class="flex justify-between items-center p-6 bg-white shadow-md sticky top-0 z-50">
     <div class="text-2xl font-bold">Indiemusic</div>
     <div class="space-x-6">
       <a href="#discover" class="hover:text-blue-600">Discover</a>
-      <a href="#play" class="hover:text-blue-600">Play</a>
-      <a href="#shows" class="hover:text-blue-600">Live Shows</a>
-      <a href="#support" class="hover:text-blue-600">Support Artists</a>
+      <a href="#play" class="hover:text-purple-600">Play</a>
+      <a href="#shows" class="hover:text-green-600">Live Shows</a>
+      <a href="#support" class="hover:text-yellow-600">Support Artists</a>
     </div>
   </nav>
 
-  <!-- Hero Section -->
-  <section class="flex flex-col items-center justify-center text-center py-24 bg-gradient-to-r from-blue-400 to-purple-500 text-white">
-    <h1 class="text-5xl font-extrabold mb-4">Find Your Next Favorite Artist</h1>
-    <p class="text-xl mb-8">Indiemusic connects you with emerging talents that match your vibe.</p>
-    <a href="#discover" class="bg-white text-blue-600 px-6 py-3 rounded-full font-semibold hover:bg-gray-100">Start Discovering</a>
-  </section>
+  <!-- Top Search Bar -->
+  <div class="flex justify-center mt-10 px-6">
+    <input
+      type="text"
+      placeholder="What do you want to play?"
+      class="w-full max-w-2xl border-2 border-gray-300 rounded-full px-6 py-3 shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+    />
+  </div>
 
-  <!-- Discover Section -->
-  <section id="discover" class="py-20 px-8">
-    <h2 class="text-4xl font-bold text-center mb-10">🎯 Smarter Discovery</h2>
-    <div class="max-w-4xl mx-auto text-center">
-      <p class="mb-6">Find musicians who share your passion. Swipe through curated tracks tailored to your taste.</p>
-      <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full">Swipe Now</button>
+  <!-- Smart Discovery Section -->
+  <section id="discover" class="py-16 px-6">
+    <h2 class="text-3xl font-bold text-center mb-8">🎯 Smart Discovery</h2>
+    <div class="max-w-5xl mx-auto grid gap-6 grid-cols-1 md:grid-cols-3">
+      <div class="bg-pink-100 rounded-lg shadow p-6">
+        <h3 class="text-xl font-semibold mb-2">Folk Rock Vibes</h3>
+        <p>Fresh tracks tailored for folk-rock lovers 🎸</p>
+      </div>
+      <div class="bg-yellow-100 rounded-lg shadow p-6">
+        <h3 class="text-xl font-semibold mb-2">Activism in Music</h3>
+        <p>Empowering songs with a cause ✊</p>
+      </div>
+      <div class="bg-green-100 rounded-lg shadow p-6">
+        <h3 class="text-xl font-semibold mb-2">Social Conscious Beats</h3>
+        <p>Music that speaks volumes about change 🌍</p>
+      </div>
     </div>
   </section>
 
-  <!-- Play Section -->
-  <section id="play" class="py-20 px-8 bg-gray-100">
-    <h2 class="text-4xl font-bold text-center mb-10">🎥 Play: Showcase Your Music</h2>
-    <div class="max-w-4xl mx-auto text-center">
-      <p class="mb-6">Short reels from artists. Connect, vibe, and share your energy with fans!</p>
-      <button class="bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded-full">View Play</button>
+  <!-- Made For You Section -->
+  <section class="py-16 px-6 bg-white">
+    <h2 class="text-3xl font-bold text-center mb-8">Made For You</h2>
+    <div class="max-w-5xl mx-auto grid gap-6 grid-cols-2 md:grid-cols-4">
+      <div class="bg-blue-200 rounded-lg shadow p-6 text-center">
+        <h3 class="font-semibold">Daily Mix 1</h3>
+      </div>
+      <div class="bg-purple-200 rounded-lg shadow p-6 text-center">
+        <h3 class="font-semibold">Daily Mix 2</h3>
+      </div>
+      <div class="bg-red-200 rounded-lg shadow p-6 text-center">
+        <h3 class="font-semibold">Discover Weekly</h3>
+      </div>
+      <div class="bg-green-200 rounded-lg shadow p-6 text-center">
+        <h3 class="font-semibold">Release Radar</h3>
+      </div>
     </div>
   </section>
 
-  <!-- Shows Section -->
-  <section id="shows" class="py-20 px-8">
-    <h2 class="text-4xl font-bold text-center mb-10">🎟️ Live Show Waitlist</h2>
-    <div class="max-w-4xl mx-auto text-center">
-      <p class="mb-6">Pledge your interest for upcoming gigs. Bring your favorite artists to your city!</p>
-      <button class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full">Join Waitlist</button>
+  <!-- Popular Radio Artists -->
+  <section class="py-16 px-6">
+    <h2 class="text-3xl font-bold text-center mb-8">🎧 Popular Radio</h2>
+    <div class="max-w-6xl mx-auto grid gap-6 grid-cols-2 sm:grid-cols-3 md:grid-cols-5">
+      <div class="bg-white rounded-lg shadow hover:bg-gray-100 p-4 text-center">Alka Yagnik</div>
+      <div class="bg-white rounded-lg shadow hover:bg-gray-100 p-4 text-center">Arijit Singh</div>
+      <div class="bg-white rounded-lg shadow hover:bg-gray-100 p-4 text-center">Shreya Ghoshal</div>
+      <div class="bg-white rounded-lg shadow hover:bg-gray-100 p-4 text-center">KK</div>
+      <div class="bg-white rounded-lg shadow hover:bg-gray-100 p-4 text-center">Diljit Dosanjh</div>
+      <div class="bg-white rounded-lg shadow hover:bg-gray-100 p-4 text-center">A.R. Rahman</div>
+      <div class="bg-white rounded-lg shadow hover:bg-gray-100 p-4 text-center">Karan Aujla</div>
+      <div class="bg-white rounded-lg shadow hover:bg-gray-100 p-4 text-center">Lata Mangeshkar</div>
+      <div class="bg-white rounded-lg shadow hover:bg-gray-100 p-4 text-center">Kumar Sanu</div>
+      <div class="bg-white rounded-lg shadow hover:bg-gray-100 p-4 text-center">Yo Yo Honey Singh</div>
     </div>
   </section>
 
-  <!-- Support Artists Section -->
-  <section id="support" class="py-20 px-8 bg-gray-100">
-    <h2 class="text-4xl font-bold text-center mb-10">💰 Support Your Artists</h2>
-    <div class="max-w-4xl mx-auto text-center">
-      <p class="mb-6">Tip your favorite artists, buy merch, and get early access to exclusive drops.</p>
-      <button class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-full">Support Now</button>
+  <!-- Popular Albums and Singles -->
+  <section class="py-16 px-6 bg-white">
+    <h2 class="text-3xl font-bold text-center mb-8">🎶 Popular Albums & Singles</h2>
+    <div class="max-w-6xl mx-auto grid gap-6 grid-cols-2 sm:grid-cols-3 md:grid-cols-5">
+      <div class="bg-white rounded-lg shadow hover:bg-gray-100 p-4 text-center">Jhol</div>
+      <div class="bg-white rounded-lg shadow hover:bg-gray-100 p-4 text-center">Aashiqui 2</div>
+      <div class="bg-white rounded-lg shadow hover:bg-gray-100 p-4 text-center">Ranjhan</div>
+      <div class="bg-white rounded-lg shadow hover:bg-gray-100 p-4 text-center">Sanam Teri Kasam</div>
+      <div class="bg-white rounded-lg shadow hover:bg-gray-100 p-4 text-center">Ultimate Love Songs</div>
+      <div class="bg-white rounded-lg shadow hover:bg-gray-100 p-4 text-center">Glory</div>
+      <div class="bg-white rounded-lg shadow hover:bg-gray-100 p-4 text-center">Yeh Jawaani Hai Deewani</div>
+      <div class="bg-white rounded-lg shadow hover:bg-gray-100 p-4 text-center">Jab We Met</div>
+      <div class="bg-white rounded-lg shadow hover:bg-gray-100 p-4 text-center">Making Memories</div>
+      <div class="bg-white rounded-lg shadow hover:bg-gray-100 p-4 text-center">Young G.O.A.T</div>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="bg-white shadow-inner py-6 mt-10 text-center">
-    <p class="text-gray-500">&copy; 2025 Indiemusic. All rights reserved.</p>
+  <!-- Placeholder Footer -->
+  <footer class="bg-white py-8 text-center text-gray-500">
+    &copy; 2025 Indiemusic. All rights reserved.
   </footer>
 
 </body>
-
 </html>

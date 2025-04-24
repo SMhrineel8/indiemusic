@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Play - IndieMusic</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    body {
+      line-height: 1.6;
+      color: #fff;
+      background-color: #000;
+      overflow: hidden;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(10px);
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #2d7fea;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+    }
+
+    nav ul li {
+      margin-left: 25px;
+    }
+
+    nav ul li a {
+      color: #fff;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    nav ul li a:hover {
+      color: #2d7fea;
+    }
+
+    .play-container {
+      height: 100vh;
+      width: 100%;
+      position: relative;
+    }
+
+    .play-video {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+
+    .play-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 20px;
+      background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+      color: white;
+      z-index: 10;
+    }
+
+    .music-info {
+      max-width: 500px;
+    }
+
+    .song-title {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #2d7fea;
+    }
+
+    .artist-name {
+      font-size: 1.2rem;
+      margin: 5px 0;
+      opacity: 0.85;
+    }
+
+    .song-description {
+      font-size: 1rem;
+      margin-top: 10px;
+      opacity: 0.75;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .action-btn {
+      background: rgba(255,255,255,0.1);
+      color: white;
+      border: none;
+      padding: 10px 14px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      transition: background 0.2s;
+    }
+
+    .action-btn:hover {
+      background: rgba(255,255,255,0.25);
+    }
+
+    .icon {
+      margin-right: 6px;
+    }
+
+    .side-nav {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      z-index: 10;
+    }
+
+    .side-nav-btn {
+      background: rgba(0,0,0,0.3);
+      border: none;
+      border-radius: 12px;
+      color: white;
+      padding: 10px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 1.3rem;
+      transition: transform 0.2s;
+    }
+
+    .side-nav-btn:hover {
+      transform: scale(1.1);
+    }
+
+    .side-nav-btn .count {
+      font-size: 0.75rem;
+      margin-top: 4px;
+    }
+
+    .fab-upload {
+      position: absolute;
+      bottom: 90px;
+      right: 20px;
+      z-index: 15;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background-color: #2d7fea;
+      color: white;
+      font-size: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .fab-upload:hover {
+      transform: scale(1.1);
+    }
+
+    .menu-btn {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 1.5rem;
+      color: white;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .play-navigation {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: 5;
+    }
+
+    .nav-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.1);
+      color: white;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .nav-arrow:hover {
+      background: rgba(255,255,255,0.25);
+    }
+
+    .prev-btn {
+      left: 10px;
+    }
+
+    .next-btn {
+      right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">IndieMusic</div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="discover.html">Discover</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="play-container">
+    <img src="/api/placeholder/1080/1920" alt="Music Video" class="play-video">
+
+    <div class="play-overlay">
+      <div class="music-info">
+        <h1 class="song-title">Midnight Echoes</h1>
+        <h2 class="artist-name">Echo Chamber</h2>
+        <p class="song-description">New release from Echo Chamber's upcoming album "Digital Dreams" - a fusion of ambient electronic and indie rock that explores themes of isolation in the digital age.</p>
+        <div class="action-buttons">
+          <button class="action-btn"><span class="icon">❤️</span> Like</button>
+          <button class="action-btn"><span class="icon">💬</span> Comment</button>
+          <button class="action-btn"><span class="icon">🔗</span> Share</button>
+          <button class="action-btn"><span class="icon">➕</span> Playlist</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-nav">
+      <button class="side-nav-btn">❤️<span class="count">2.4k</span></button>
+      <button class="side-nav-btn">💬<span class="count">482</span></button>
+      <button class="side-nav-btn">🔗<span class="count">Share</span></button>
+      <button class="side-nav-btn">👎<span class="count">Not Interested</span></button>
+    </div>
+
+    <div class="fab-upload">+</div>
+
+    <div class="play-navigation">
+      <button class="nav-arrow prev-btn">◀</button>
+      <button class="nav-arrow next-btn">▶</button>
+    </div>
+  </div>
+</body>
+</html>

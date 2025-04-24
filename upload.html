@@ -113,7 +113,7 @@
       <input type="text" id="tags" placeholder="e.g. chill, lo-fi, upbeat">
 
       <button type="submit">Upload</button>
-      <div class="success" id="successMessage" style="display: none;">🎉 Song uploaded locally!</div>
+      <div class="success" id="successMessage" style="display: none;"></div>
     </form>
   </main>
 
@@ -142,7 +142,10 @@
       allSongs.push(songData);
       localStorage.setItem("songs", JSON.stringify(allSongs));
 
-      document.getElementById("successMessage").style.display = "block";
+      const success = document.getElementById("successMessage");
+      success.style.display = "block";
+      success.textContent = `🎉 "${title}" uploaded successfully!`;
+
       form.reset();
     });
   </script>

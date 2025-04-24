@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IndieMusic - Home</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #000;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    header {
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #111;
+      border-bottom: 1px solid #222;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #2d7fea;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    nav ul li a:hover {
+      color: #2d7fea;
+    }
+
+    .hero {
+      height: 90vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 40px 20px;
+      background: linear-gradient(to bottom, #000, #111);
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 15px;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      opacity: 0.8;
+      max-width: 600px;
+      margin-bottom: 30px;
+    }
+
+    .hero a.button {
+      background-color: #2d7fea;
+      color: #fff;
+      padding: 12px 30px;
+      border-radius: 50px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+
+    .hero a.button:hover {
+      background-color: #1b5bcc;
+    }
+
+    .section {
+      padding: 60px 20px;
+      text-align: center;
+      background-color: #111;
+    }
+
+    .section h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #2d7fea;
+    }
+
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+    }
+
+    .feature {
+      background-color: #222;
+      padding: 30px;
+      border-radius: 20px;
+      max-width: 300px;
+      text-align: left;
+      transition: transform 0.3s ease;
+    }
+
+    .feature:hover {
+      transform: translateY(-5px);
+    }
+
+    .feature h3 {
+      color: #2d7fea;
+      margin-bottom: 10px;
+    }
+
+    .feature p {
+      font-size: 0.95rem;
+      opacity: 0.8;
+    }
+
+    footer {
+      background-color: #000;
+      padding: 30px 20px;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">IndieMusic</div>
+    <nav>
+      <ul>
+        <li><a href="discover.html">Discover</a></li>
+        <li><a href="play.html">Play</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <h1>Welcome to IndieMusic</h1>
+    <p>Discover, support, and enjoy independent music from artists around the world. Be part of the next music revolution.</p>
+    <a href="discover.html" class="button">Start Discovering</a>
+  </div>
+
+  <div class="section">
+    <h2>Why IndieMusic?</h2>
+    <div class="features">
+      <div class="feature">
+        <h3>Independent Artists</h3>
+        <p>Support and explore songs from real artists outside the mainstream industry.</p>
+      </div>
+      <div class="feature">
+        <h3>Short Music Reels</h3>
+        <p>Swipe through short music reels just like you would on TikTok or Reels—pure music, no noise.</p>
+      </div>
+      <div class="feature">
+        <h3>Built for India</h3>
+        <p>Hyperlocal vibe. Artists and listeners connect over raw, regional, and real music.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 IndieMusic. All rights reserved.
+  </footer>
+</body>
+</html>

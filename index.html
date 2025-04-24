@@ -28,19 +28,23 @@
     nav {
       display: flex;
       justify-content: center;
-      gap: 2rem;
-      margin-top: 0.5rem;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-top: 1rem;
       font-weight: 500;
     }
 
     nav a {
       color: white;
       text-decoration: none;
-      transition: opacity 0.3s ease;
+      font-size: 1rem;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      transition: background 0.3s ease;
     }
 
     nav a:hover {
-      opacity: 0.8;
+      background: rgba(255, 255, 255, 0.2);
     }
 
     .hero {
@@ -168,18 +172,19 @@
 </head>
 <body>
 
- <header>
-  <h1>IndieMusic</h1>
-  <p>Discover and support independent musicians</p>
-  <nav>
-    <a href="#">Home</a>
-    <a href="#">Discover</a>
-    <a href="#">Upload Music</a>
-    <a href="#">Play</a> 
-    <a href="#">About</a>
-    <a href="#">Contact</a>
-  </nav>
-</header>
+  <header>
+    <h1>IndieMusic</h1>
+    <p>Discover and support independent musicians</p>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">Discover</a>
+      <a href="#">Upload Music</a>
+      <a href="#">Play</a> 
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
+
   <section class="hero">
     <h1>Your Music, Your Way</h1>
     <p>IndieMusic is where independent musicians thrive and fans discover authentic sounds, directly from the source.</p>

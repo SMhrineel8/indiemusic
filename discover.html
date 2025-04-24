@@ -1,1 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discover Music - IndieMusic</title>
+    <style>
+        /* Basic CSS Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f4;
+        }
+        
+        a {
+            text-decoration: none;
+            color: #2f80ed;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 1rem 0;
+        }
+        
+        nav ul li {
+            margin: 0 1rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        nav ul li a:hover {
+            color: #f0f0f0;
+            text-decoration: underline;
+        }
+        
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .page-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        /* Filter Section */
+        .filters {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .filters-title {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+        
+        .filter-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .filter-group {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .filter-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .filter-select {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        .search-box {
+            display: flex;
+            margin-top: 1rem;
+        }
+        
+        .search-input {
+            flex: 1;
+            padding: 0.7rem;
+            border: 1px solid #ddd;
+            border-radius: 5px 0 0 5px;
+            font-size: 1rem;
+        }
+        
+        .search-btn {
+            background: #2f80ed;
+            color: white;
+            border: none;
+            padding: 0 1.5rem;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        /* Music Grid */
+        .music-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .music-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .music-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .music-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        
+        .music-info {
+            padding: 1.5rem;
+        }
+        
+        .song-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.3rem;
+        }
+        
+        .artist-name {
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+        
+        .music-genre {
+            display: inline-block;
+            background: #f0f0f0;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+        }
+        
+        .music-controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .play-btn {
+            background: #2f80ed;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .play-btn:hover {
+            background: #1c6ed9;
+        }
+        
+        .like-btn {
+            background: none;
+            border: none;
+            color: #f44336;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+        
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 3rem;
+        }
+        
+        .page-link {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            margin: 0 0.3rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+        
+        .page-link:hover,
+        .page-link.active {
+            background: #2f80ed;
+            color: white;
+            border-color: #2f80ed;
+        }
+        
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-links a {
+            color: white;
+            margin: 0 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: #2f80ed;
+        }
+        
+        .copyright {
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        /* Media Queries */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+            }
+            
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+            
+            .filter-options {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">IndieMusic</div>
+        <p>Discover and support independent musicians</p>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="discover.html">Discover</a></li>
+                <li><a href="upload.html">Upload Music</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
 
+    <div class="container">
+        <h1 class="page-title">Discover New Music</h1>
+        
+        <div class="filters">
+            <h2 class="filters-title">Filter Music</h2>
+            <div class="filter-options">
+                <div class="filter-group">
+                    <label class="filter-label" for="genre">Genre</label>
+                    <select class="filter-select" id="genre">
+                        <option value="all">All Genres</option>
+                        <option value="rock">Rock</option>
+                        <option value="electronic">Electronic</option>
+                        <option value="folk">Folk</option>
+                        <option value="hip-hop">Hip Hop</option>
+                        <option value="jazz">Jazz</option>
+                        <option value="classical">Classical</option>
+                        <option value="pop">Pop</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label" for="mood">Mood</label>
+                    <select class="filter-select" id="mood">
+                        <option value="all">All Moods</option>
+                        <option value="happy">Happy</option>
+                        <option value="chill">Chill</option>
+                        <option value="energetic">Energetic</option>
+                        <option value="melancholic">Melancholic</option>
+                        <option value="romantic">Romantic</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label" for="date">Release Date</label>
+                    <select class="filter-select" id="date">
+                        <option value="all">All Time</option>
+                        <option value="week">Last Week</option>
+                        <option value="month">Last Month</option>
+                        <option value="year">Last Year</option>
+                    </select>
+                </div>
+            </div>
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="Search artists or songs...">
+                <button class="search-btn">Search</button>
+            </div>
+        </div>
+        
+        <div class="music-grid">
+            <div class="music-card">
+                <img src="/api/placeholder/300/200" alt="Song 1" class="music-img">
+                <div class="music-info">
+                    <h3 class="song-title">Summer Nights</h3>
+                    <p class="artist-name">Luna Ray</p>
+                    <span class="music-genre">Alternative Folk</span>
+                    <div class="music-controls">
+                        <button class="play-btn">Play</button>
+                        <button class="like-btn">❤</button>
+                    </div>
+                </div>
+            </div>
+            <div class="music-card">
+                <img src="/api/placeholder/300/200" alt="Song 2" class="music-img">
+                <div class="music-info">
+                    <h3 class="song-title">Urban Jungle</h3>
+                    <p class="artist-name">Metro Waves</p>
+                    <span class="music-genre">Indie Rock</span>
+                    <div class="music-controls">
+                        <button class="play-btn">Play</button>
+                        <button class="like-btn">❤</button>
+                    </div>
+                </div>
+            </div>
+            <div class="music-card">
+                <img src="/api/placeholder/300/200" alt="Song 3" class="music-img">
+                <div class="music-info">
+                    <h3 class="song-title">Digital Dreams</h3>
+                    <p class="artist-name">Echo Chamber</p>
+                    <span class="music-genre">Electronic</span>
+                    <div class="music-controls">
+                        <button class="play-btn">Play</button>
+                        <button class="like-btn">❤</button>
+                    </div>
+                </div>
+            </div>
+            <div class="music-card">
+                <img src="/api/placeholder/300/200" alt="Song 4" class="music-img">
+                <div class="music-info">
+                    <h3 class="song-title">Midnight Blues</h3>
+                    <p class="artist-name">Velvet Sound</p>
+                    <span class="music-genre">Jazz</span>
+                    <div class="music-controls">
+                        <button class="play-btn">Play</button>
+                        <button class="like-btn">❤</button>
+                    </div>
+                </div>
+            </div>
+            <div class="music-card">
+                <img src="/api/placeholder/300/200" alt="Song 5" class="music-img">
+                <div class="music-info">
+                    <h3 class="song-title">Northern Lights</h3>
+                    <p class="artist-name">Arctic Pulse</p>
+                    <span class="music-genre">Ambient</span>
+                    <div class="music-controls">
+                        <button class="play-btn">Play</button>
+                        <button class="like-btn">❤</button>
+                    </div>
+                </div>
+            </div>
+            <div class="music-card">
+                <img src="/api/placeholder/300/200" alt="Song 6" class="music-img">
+                <div class="music-info">
+                    <h3 class="song-title">Sunrise Serenade</h3>
+                    <p class="artist-name">Morning Glory</p>
+                    <span class="music-genre">Classical</span>
+                    <div class="music-controls">
+                        <button class="play-btn">Play</button>
+                        <button class="like-btn">❤</button>
+                    </div>
+                </div>
+            </div>
+            <div class="music-card">
+                <img src="/api/placeholder/300/200" alt="Song 7" class="music-img">
+                <div class="music-info">
+                    <h3 class="song-title">City Lights</h3>
+                    <p class="artist-name">Urban Echoes</p>
+                    <span class="music-genre">Hip Hop</span>
+                    <div class="music-controls">
+                        <button class="play-btn">Play</button>
+                        <button class="like-btn">❤</button>
+                    </div>
+                </div>
+            </div>
+            <div class="music-card">
+                <img src="/api/placeholder/300/200" alt="Song 8" class="music-img">
+                <div class="music-info">
+                    <h3 class="song-title">Ocean Waves</h3>
+                    <p class="artist-name">Coastal Dreams</p>
+                    <span class="music-genre">Lo-fi</span>
+                    <div class="music-controls">
+                        <button class="play-btn">Play</button>
+                        <button class="like-btn">❤</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="pagination">
+            <a href="#" class="page-link active">1</a>
+            <a href="#" class="page-link">2</a>
+            <a href="#" class="page-link">3</a>
+            <a href="#" class="page-link">4</a>
+            <a href="#" class="page-link">Next</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-links">
+            <a href="about.html">About Us</a>
+            <a href="terms.html">Terms of Service</a>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="contact.html">Contact</a>
+        </div>
+        <p class="copyright">© 2025 IndieMusic. All rights reserved.</p>
+    </footer>
+</body>
+</html>

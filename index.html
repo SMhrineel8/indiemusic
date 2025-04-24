@@ -3,103 +3,108 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>IndieMusic</title>
-  <link rel="stylesheet" href="styles/main.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <title>Indiemusic – Discover New Artists</title>
+  <!-- TailwindCSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-  <header class="header">
-    <div class="header-container">
-      <div class="logo"><a href="/">Indiemusic</a></div>
-      <div class="search-bar">
-        <input type="text" placeholder="What do you want to play?" />
-        <button><i class="fas fa-search"></i></button>
+<body class="bg-gradient-to-tr from-white to-blue-50 text-gray-900">
+
+  <!-- Navbar -->
+  <nav class="flex justify-between items-center p-6 bg-white shadow-md sticky top-0 z-50">
+    <div class="text-2xl font-bold">Indiemusic</div>
+    <div class="space-x-6">
+      <a href="#discover" class="hover:text-blue-600">Discover</a>
+      <a href="#play" class="hover:text-purple-600">Play</a>
+      <a href="#shows" class="hover:text-green-600">Live Shows</a>
+      <a href="#support" class="hover:text-yellow-600">Support Artists</a>
+    </div>
+  </nav>
+
+  <!-- Top Search Bar -->
+  <div class="flex justify-center mt-10 px-6">
+    <input
+      type="text"
+      placeholder="What do you want to play?"
+      class="w-full max-w-2xl border-2 border-gray-300 rounded-full px-6 py-3 shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+    />
+  </div>
+
+  <!-- Smart Discovery Section -->
+  <section id="discover" class="py-16 px-6">
+    <h2 class="text-3xl font-bold text-center mb-8">🎯 Smart Discovery</h2>
+    <div class="max-w-5xl mx-auto grid gap-6 grid-cols-1 md:grid-cols-3">
+      <div class="bg-pink-100 rounded-lg shadow p-6">
+        <h3 class="text-xl font-semibold mb-2">Folk Rock Vibes</h3>
+        <p>Fresh tracks tailored for folk-rock lovers 🎸</p>
       </div>
-      <nav class="main-nav">
-        <ul>
-          <li><a href="#">Discover</a></li>
-          <li><a href="#">Play</a></li>
-          <li><a href="#">Live Shows</a></li>
-          <li><a href="#">Support Artists</a></li>
-        </ul>
-      </nav>
-      <div class="auth-buttons">
-        <button class="login-btn">Login</button>
-        <button class="signup-btn">Sign Up</button>
+      <div class="bg-yellow-100 rounded-lg shadow p-6">
+        <h3 class="text-xl font-semibold mb-2">Activism in Music</h3>
+        <p>Empowering songs with a cause ✊</p>
+      </div>
+      <div class="bg-green-100 rounded-lg shadow p-6">
+        <h3 class="text-xl font-semibold mb-2">Social Conscious Beats</h3>
+        <p>Music that speaks volumes about change 🌍</p>
       </div>
     </div>
-  </header>
+  </section>
 
-  <main class="home-page">
-    <section class="discovery-section">
-      <h2>🔍 Smart Discovery</h2>
-      <div class="card-grid">
-        <div class="category-card" style="background-color:#F8E1E9">🎸 Folk Rock Vibes<br><small>Fresh tracks tailored for folk-rock lovers</small></div>
-        <div class="category-card" style="background-color:#FFF3C4">✊ Activism in Music<br><small>Empowering songs with a cause</small></div>
-        <div class="category-card" style="background-color:#D6F2E4">🌎 Social Conscious Beats<br><small>Music that speaks volumes about change</small></div>
+  <!-- Made For You Section -->
+  <section class="py-16 px-6 bg-white">
+    <h2 class="text-3xl font-bold text-center mb-8">Made For You</h2>
+    <div class="max-w-5xl mx-auto grid gap-6 grid-cols-2 md:grid-cols-4">
+      <div class="bg-blue-200 rounded-lg shadow p-6 text-center">
+        <h3 class="font-semibold">Daily Mix 1</h3>
       </div>
-    </section>
-
-    <section class="made-for-you-section">
-      <h2>Made For You</h2>
-      <div class="playlist-cards">
-        <img src="images/mix1.jpg" alt="Daily Mix 1"/>
-        <img src="images/mix2.jpg" alt="Daily Mix 2"/>
-        <img src="images/weekly.jpg" alt="Discover Weekly"/>
-        <img src="images/radar.jpg" alt="Release Radar"/>
+      <div class="bg-purple-200 rounded-lg shadow p-6 text-center">
+        <h3 class="font-semibold">Daily Mix 2</h3>
       </div>
-    </section>
-
-    <section class="popular-radio-section">
-      <h2>🎧 Popular Radio</h2>
-      <div class="artist-cards">
-        <img src="images/artist1.jpg" alt="Alka Yagnik"/>
-        <img src="images/artist2.jpg" alt="Arijit Singh"/>
-        <img src="images/artist3.jpg" alt="Shreya Ghoshal"/>
-        <img src="images/artist4.jpg" alt="KK"/>
-        <img src="images/artist5.jpg" alt="Diljit Dosanjh"/>
-        <img src="images/artist6.jpg" alt="A.R. Rahman"/>
-        <img src="images/artist7.jpg" alt="Karan Aujla"/>
-        <img src="images/artist8.jpg" alt="Lata Mangeshkar"/>
+      <div class="bg-red-200 rounded-lg shadow p-6 text-center">
+        <h3 class="font-semibold">Discover Weekly</h3>
       </div>
-    </section>
-
-    <section class="popular-albums-section">
-      <h2>🎵 Popular Albums & Singles</h2>
-      <div class="album-cards">
-        <img src="images/album1.jpg" alt="Jhol"/>
-        <img src="images/album2.jpg" alt="Aashiqui 2"/>
-        <img src="images/album3.jpg" alt="Ranjhan"/>
-        <img src="images/album4.jpg" alt="Sanam Teri Kasam"/>
-        <img src="images/album5.jpg" alt="Ultimate Love Songs"/>
+      <div class="bg-green-200 rounded-lg shadow p-6 text-center">
+        <h3 class="font-semibold">Release Radar</h3>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="feature-highlights">
-      <h2>Why Choose IndieMusic?</h2>
-      <div class="features-grid">
-        <div class="feature-card">
-          <h3>🎯 Smarter Discovery</h3>
-          <p>We focus on getting your music in front of the right listeners—those who already love your genre.</p>
-        </div>
-        <div class="feature-card">
-          <h3>👥 Turning Listeners into a Movement</h3>
-          <p>Fans don't just stream—they engage with behind-the-scenes content and exclusive events.</p>
-        </div>
-        <div class="feature-card">
-          <h3>🎟️ Live Show Waitlist</h3>
-          <p>Fans can pledge interest before gigs are planned.</p>
-        </div>
-        <div class="feature-card">
-          <h3>💰 Beyond Streaming Revenue</h3>
-          <p>Monetize via tipping, pre-releases, jam sessions, merch drops.</p>
-        </div>
-      </div>
-    </section>
-  </main>
+  <!-- Popular Radio Artists -->
+  <section class="py-16 px-6">
+    <h2 class="text-3xl font-bold text-center mb-8">🎧 Popular Radio</h2>
+    <div class="max-w-6xl mx-auto grid gap-6 grid-cols-2 sm:grid-cols-3 md:grid-cols-5">
+      <div class="bg-white rounded-lg shadow hover:bg-gray-100 p-4 text-center">Alka Yagnik</div>
+      <div class="bg-white rounded-lg shadow hover:bg-gray-100 p-4 text-center">Arijit Singh</div>
+      <div class="bg-white rounded-lg shadow hover:bg-gray-100 p-4 text-center">Shreya Ghoshal</div>
+      <div class="bg-white rounded-lg shadow hover:bg-gray-100 p-4 text-center">KK</div>
+      <div class="bg-white rounded-lg shadow hover:bg-gray-100 p-4 text-center">Diljit Dosanjh</div>
+      <div class="bg-white rounded-lg shadow hover:bg-gray-100 p-4 text-center">A.R. Rahman</div>
+      <div class="bg-white rounded-lg shadow hover:bg-gray-100 p-4 text-center">Karan Aujla</div>
+      <div class="bg-white rounded-lg shadow hover:bg-gray-100 p-4 text-center">Lata Mangeshkar</div>
+      <div class="bg-white rounded-lg shadow hover:bg-gray-100 p-4 text-center">Kumar Sanu</div>
+      <div class="bg-white rounded-lg shadow hover:bg-gray-100 p-4 text-center">Yo Yo Honey Singh</div>
+    </div>
+  </section>
 
-  <footer class="footer">
-    <p>&copy; 2025 IndieMusic. All rights reserved.</p>
+  <!-- Popular Albums and Singles -->
+  <section class="py-16 px-6 bg-white">
+    <h2 class="text-3xl font-bold text-center mb-8">🎶 Popular Albums & Singles</h2>
+    <div class="max-w-6xl mx-auto grid gap-6 grid-cols-2 sm:grid-cols-3 md:grid-cols-5">
+      <div class="bg-white rounded-lg shadow hover:bg-gray-100 p-4 text-center">Jhol</div>
+      <div class="bg-white rounded-lg shadow hover:bg-gray-100 p-4 text-center">Aashiqui 2</div>
+      <div class="bg-white rounded-lg shadow hover:bg-gray-100 p-4 text-center">Ranjhan</div>
+      <div class="bg-white rounded-lg shadow hover:bg-gray-100 p-4 text-center">Sanam Teri Kasam</div>
+      <div class="bg-white rounded-lg shadow hover:bg-gray-100 p-4 text-center">Ultimate Love Songs</div>
+      <div class="bg-white rounded-lg shadow hover:bg-gray-100 p-4 text-center">Glory</div>
+      <div class="bg-white rounded-lg shadow hover:bg-gray-100 p-4 text-center">Yeh Jawaani Hai Deewani</div>
+      <div class="bg-white rounded-lg shadow hover:bg-gray-100 p-4 text-center">Jab We Met</div>
+      <div class="bg-white rounded-lg shadow hover:bg-gray-100 p-4 text-center">Making Memories</div>
+      <div class="bg-white rounded-lg shadow hover:bg-gray-100 p-4 text-center">Young G.O.A.T</div>
+    </div>
+  </section>
+
+  <!-- Placeholder Footer -->
+  <footer class="bg-white py-8 text-center text-gray-500">
+    &copy; 2025 Indiemusic. All rights reserved.
   </footer>
+
 </body>
 </html>

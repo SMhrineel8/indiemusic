@@ -10,234 +10,253 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
         }
         
         body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: #333;
-            background-color: #f5f7fa;
+            background-color: #f4f4f4;
         }
         
         a {
             text-decoration: none;
-            color: #333;
+            color: #2f80ed;
         }
         
         /* Header Styles */
         header {
-            background-color: #fff;
-            padding: 15px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 1rem;
+            text-align: center;
         }
         
         .logo {
-            font-size: 1.5rem;
+            font-size: 2rem;
             font-weight: bold;
-            color: #333;
+            margin-bottom: 0.5rem;
         }
         
         nav ul {
             display: flex;
+            justify-content: center;
             list-style: none;
+            padding: 1rem 0;
         }
         
         nav ul li {
-            margin-left: 25px;
+            margin: 0 1rem;
         }
         
         nav ul li a {
+            color: white;
             font-weight: 500;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
         }
         
         nav ul li a:hover {
-            color: #2d7fea;
+            color: #f0f0f0;
+            text-decoration: underline;
         }
         
-        /* Search Bar */
-        .search-container {
+        /* Hero Section */
+        .hero {
+            background: url('/api/placeholder/1200/600') center/cover;
+            height: 60vh;
             display: flex;
+            flex-direction: column;
             justify-content: center;
-            margin: 30px auto;
-            max-width: 700px;
+            align-items: center;
+            text-align: center;
+            color: white;
+            position: relative;
         }
         
-        .search-bar {
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            padding: 15px 25px;
-            border-radius: 50px;
-            border: none;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            font-size: 1rem;
-            outline: none;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
         }
         
-        /* Discovery Section */
-        .discovery-section {
-            padding: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #2f80ed;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: #1c6ed9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Featured Artists Section */
+        .featured {
+            padding: 4rem 2rem;
+            background-color: white;
         }
         
         .section-title {
-            font-size: 1.3rem;
-            margin-bottom: 25px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-        }
-        
-        .section-title .emoji {
-            margin-right: 10px;
-            font-size: 1.4rem;
-        }
-        
-        .category-cards {
-            display: flex;
-            gap: 20px;
-            overflow-x: auto;
-            padding-bottom: 15px;
-        }
-        
-        .category-card {
-            min-width: 300px;
-            border-radius: 12px;
-            padding: 20px;
-            flex: 1;
-        }
-        
-        .category-card h3 {
-            font-size: 1.1rem;
-            margin-bottom: 10px;
-        }
-        
-        .category-card p {
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
-        
-        .folk-rock {
-            background-color: #ffeef1;
-        }
-        
-        .activism {
-            background-color: #fff9e6;
-        }
-        
-        .social-conscious {
-            background-color: #e6f7ee;
-        }
-        
-        /* Made For You Section */
-        .made-for-you {
-            padding: 30px;
-            max-width: 1200px;
-            margin: 20px auto;
-        }
-        
-        .playlist-row {
-            display: flex;
-            gap: 15px;
-            overflow-x: auto;
-            padding-bottom: 15px;
-        }
-        
-        .playlist-card {
-            min-width: 180px;
-            background-color: #e8f0fb;
-            border-radius: 8px;
-            padding: 20px;
             text-align: center;
-            transition: all 0.3s ease;
-            cursor: pointer;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            position: relative;
         }
         
-        .playlist-card:hover {
-            transform: translateY(-5px);
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: #2f80ed;
         }
         
-        .playlist-card:nth-child(2) {
-            background-color: #f0e6ff;
-        }
-        
-        .playlist-card:nth-child(3) {
-            background-color: #ffe6e6;
-        }
-        
-        .playlist-card:nth-child(4) {
-            background-color: #e6fff0;
-        }
-        
-        /* Popular Radio Section */
-        .popular-radio {
-            padding: 30px;
+        .artists-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
             max-width: 1200px;
             margin: 0 auto;
-        }
-        
-        .artist-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            justify-content: center;
         }
         
         .artist-card {
-            background-color: #fff;
-            border-radius: 8px;
-            padding: 15px 25px;
-            min-width: 150px;
-            text-align: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            transition: all 0.2s ease;
-            cursor: pointer;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
         }
         
         .artist-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
         
-        /* Popular Albums Section */
-        .popular-albums {
-            padding: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-            margin-bottom: 50px;
+        .artist-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
         }
         
-        .album-row {
+        .artist-info {
+            padding: 1.5rem;
+        }
+        
+        .artist-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .artist-genre {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        .play-btn {
+            background: #2f80ed;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .play-btn:hover {
+            background: #1c6ed9;
+        }
+        
+        /* How It Works Section */
+        .how-it-works {
+            padding: 4rem 2rem;
+            background-color: #f9f9f9;
+        }
+        
+        .steps {
             display: flex;
             flex-wrap: wrap;
-            gap: 15px;
             justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
         }
         
-        .album-card {
-            background-color: #fff;
-            border-radius: 8px;
-            padding: 15px 25px;
-            min-width: 150px;
+        .step {
+            flex: 1;
+            min-width: 300px;
             text-align: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            transition: all 0.2s ease;
-            cursor: pointer;
+            padding: 2rem;
         }
         
-        .album-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        .step-icon {
+            font-size: 3rem;
+            color: #2f80ed;
+            margin-bottom: 1rem;
+        }
+        
+        .step-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+        
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .cta p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         /* Footer */
         footer {
             background: #333;
             color: white;
-            padding: 40px 30px;
+            padding: 2rem;
             text-align: center;
         }
         
@@ -245,18 +264,17 @@
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            margin-bottom: 20px;
+            margin-bottom: 1rem;
         }
         
         .footer-links a {
             color: white;
-            margin: 0 15px;
-            opacity: 0.8;
+            margin: 0 1rem;
             transition: all 0.3s ease;
         }
         
         .footer-links a:hover {
-            opacity: 1;
+            color: #2f80ed;
         }
         
         .copyright {
@@ -266,27 +284,20 @@
         
         /* Media Queries */
         @media (max-width: 768px) {
-            header {
-                flex-direction: column;
-                text-align: center;
-                padding: 15px;
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
             }
             
             nav ul {
-                margin-top: 15px;
-                justify-content: center;
-            }
-            
-            nav ul li {
-                margin: 0 10px;
-            }
-            
-            .category-cards {
                 flex-direction: column;
             }
             
-            .category-card {
-                min-width: unset;
+            nav ul li {
+                margin: 0.5rem 0;
             }
         }
     </style>
@@ -294,117 +305,86 @@
 <body>
     <header>
         <div class="logo">IndieMusic</div>
+        <p>Discover and support independent musicians</p>
         <nav>
             <ul>
+                <li><a href="index.html">Home</a></li>
                 <li><a href="discover.html">Discover</a></li>
-                <li><a href="play.html">Play</a></li>
-                <li><a href="live-shows.html">Live Shows</a></li>
-                <li><a href="support-artists.html">Support Artists</a></li>
+                <li><a href="upload.html">Upload Music</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
             </ul>
         </nav>
     </header>
 
-    <div class="search-container">
-        <input type="text" class="search-bar" placeholder="What do you want to play?">
-    </div>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Your Music, Your Way</h1>
+            <p>IndieMusic is the platform where independent musicians thrive and fans discover authentic sounds directly from the artists.</p>
+            <a href="discover.html" class="btn">Discover Music</a>
+        </div>
+    </section>
 
-    <section class="discovery-section">
-        <h2 class="section-title"><span class="emoji">🎯</span> Smart Discovery</h2>
-        <div class="category-cards">
-            <div class="category-card folk-rock">
-                <h3>Folk Rock Vibes</h3>
-                <p>Fresh tracks tailored for folk-rock lovers 🎸</p>
+    <section class="featured">
+        <h2 class="section-title">Featured Artists</h2>
+        <div class="artists-grid">
+            <div class="artist-card">
+                <img src="/api/placeholder/300/200" alt="Artist 1" class="artist-img">
+                <div class="artist-info">
+                    <h3 class="artist-name">Luna Ray</h3>
+                    <p class="artist-genre">Alternative Folk</p>
+                    <button class="play-btn">Play Music</button>
+                </div>
             </div>
-            <div class="category-card activism">
-                <h3>Activism in Music</h3>
-                <p>Empowering songs with a cause 😊</p>
+            <div class="artist-card">
+                <img src="/api/placeholder/300/200" alt="Artist 2" class="artist-img">
+                <div class="artist-info">
+                    <h3 class="artist-name">Metro Waves</h3>
+                    <p class="artist-genre">Indie Rock</p>
+                    <button class="play-btn">Play Music</button>
+                </div>
             </div>
-            <div class="category-card social-conscious">
-                <h3>Social Conscious Beats</h3>
-                <p>Music that speaks volumes about change 🌎</p>
+            <div class="artist-card">
+                <img src="/api/placeholder/300/200" alt="Artist 3" class="artist-img">
+                <div class="artist-info">
+                    <h3 class="artist-name">Echo Chamber</h3>
+                    <p class="artist-genre">Electronic</p>
+                    <button class="play-btn">Play Music</button>
+                </div>
             </div>
         </div>
     </section>
 
-    <section class="made-for-you">
-        <h2 class="section-title">Made For You</h2>
-        <div class="playlist-row">
-            <div class="playlist-card">
-                <h3>Daily Mix 1</h3>
+    <section class="how-it-works">
+        <h2 class="section-title">How It Works</h2>
+        <div class="steps">
+            <div class="step">
+                <div class="step-icon">🎵</div>
+                <h3 class="step-title">Upload Your Music</h3>
+                <p>Share your original tracks with our vibrant community of music lovers.</p>
             </div>
-            <div class="playlist-card">
-                <h3>Daily Mix 2</h3>
+            <div class="step">
+                <div class="step-icon">👥</div>
+                <h3 class="step-title">Connect with Fans</h3>
+                <p>Build a following and engage directly with listeners who love your sound.</p>
             </div>
-            <div class="playlist-card">
-                <h3>Discover Weekly</h3>
-            </div>
-            <div class="playlist-card">
-                <h3>Release Radar</h3>
-            </div>
-        </div>
-    </section>
-
-    <section class="popular-radio">
-        <h2 class="section-title"><span class="emoji">🎧</span> Popular Radio</h2>
-        <div class="artist-row">
-            <div class="artist-card">
-                <p>Alka Yagnik</p>
-            </div>
-            <div class="artist-card">
-                <p>Arijit Singh</p>
-            </div>
-            <div class="artist-card">
-                <p>Shreya Ghoshal</p>
-            </div>
-            <div class="artist-card">
-                <p>KK</p>
-            </div>
-            <div class="artist-card">
-                <p>Diljit Dosanjh</p>
-            </div>
-            <div class="artist-card">
-                <p>A.R. Rahman</p>
-            </div>
-            <div class="artist-card">
-                <p>Karan Aujla</p>
-            </div>
-            <div class="artist-card">
-                <p>Lata Mangeshkar</p>
-            </div>
-            <div class="artist-card">
-                <p>Kumar Sanu</p>
-            </div>
-            <div class="artist-card">
-                <p>Yo Yo Honey Singh</p>
+            <div class="step">
+                <div class="step-icon">🚀</div>
+                <h3 class="step-title">Grow Your Presence</h3>
+                <p>Gain exposure through our featured sections and promotion opportunities.</p>
             </div>
         </div>
     </section>
 
-    <section class="popular-albums">
-        <h2 class="section-title"><span class="emoji">🎵</span> Popular Albums & Singles</h2>
-        <div class="album-row">
-            <div class="album-card">
-                <p>Jhol</p>
-            </div>
-            <div class="album-card">
-                <p>Aashiqui 2</p>
-            </div>
-            <div class="album-card">
-                <p>Ranjhan</p>
-            </div>
-            <div class="album-card">
-                <p>Sanam Teri Kasam</p>
-            </div>
-            <div class="album-card">
-                <p>Ultimate Love Songs</p>
-            </div>
-        </div>
+    <section class="cta">
+        <h2>Ready to Share Your Music?</h2>
+        <p>Join thousands of independent artists who've found their audience on IndieMusic.</p>
+        <a href="upload.html" class="btn">Get Started</a>
     </section>
 
     <footer>
         <div class="footer-links">
             <a href="about.html">About Us</a>
-            <a href="artists.html">For Artists</a>
             <a href="terms.html">Terms of Service</a>
             <a href="privacy.html">Privacy Policy</a>
             <a href="contact.html">Contact</a>

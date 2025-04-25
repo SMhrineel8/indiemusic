@@ -3,231 +3,142 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IndieMusic - Home</title>
+  <title>IndieMusic</title>
   <style>
-    /* Base Reset */
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-    body { background: #f9f9f9; color: #222; }
-
-    a { text-decoration: none; color: inherit; }
-
-    /* Join Waitlist CTA */
-    .join-waitlist {
-      background: linear-gradient(90deg, #6a11cb, #2575fc);
-      color: white;
-      text-align: center;
-      padding: 10px 20px;
-      font-weight: bold;
-      font-size: 1rem;
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f9f9f9;
     }
-
-    /* Header */
     header {
+      background-color: #4f46e5;
+      padding: 10px 20px;
+      color: white;
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      padding: 15px 20px;
-      background: white;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      align-items: center;
     }
-
-    .logo {
-      font-size: 1.5rem;
+    nav a {
+      color: white;
+      margin: 0 10px;
+      text-decoration: none;
       font-weight: bold;
-      color: #2575fc;
     }
-
-    .tabs {
+    .section {
+      padding: 30px 20px;
+    }
+    h2 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+    .grid {
       display: flex;
       gap: 20px;
-      font-size: 0.9rem;
+      flex-wrap: wrap;
     }
-
-    .search-box {
-      border: 1px solid #ccc;
-      padding: 5px 10px;
-      border-radius: 20px;
+    .placeholder-img {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #eee;
+      font-size: 14px;
+      margin-top: 40px;
+    }
+    .highlight-card {
       display: flex;
       align-items: center;
-      background: #f1f1f1;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 10px;
+      margin-bottom: 20px;
     }
-
-    .search-box input {
-      border: none;
-      background: transparent;
-      outline: none;
-      margin-left: 5px;
-    }
-
-    /* Sections */
-    .section {
-      padding: 20px;
-    }
-
-    .section-title {
-      font-size: 1.2rem;
-      margin-bottom: 15px;
-      font-weight: 600;
-    }
-
-    .scroll-row {
-      display: flex;
-      overflow-x: auto;
-      gap: 15px;
-      padding-bottom: 10px;
-    }
-
-    .scroll-row img {
+    .highlight-card img {
       width: 100px;
       height: 100px;
       object-fit: cover;
-      border-radius: 10px;
-      flex-shrink: 0;
-    }
-
-    .grid-row {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-      gap: 15px;
-    }
-
-    .grid-row img {
-      width: 100%;
-      border-radius: 10px;
-      object-fit: cover;
-    }
-
-    .highlight-card {
-      background: white;
-      padding: 15px;
-      margin-bottom: 15px;
-      border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-      display: flex;
-      gap: 15px;
-      align-items: center;
-    }
-
-    .highlight-card img {
-      width: 60px;
-      height: 60px;
-      border-radius: 8px;
-      object-fit: cover;
-    }
-
-    .highlight-text {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .highlight-text h4 {
-      font-size: 1rem;
-    }
-
-    .highlight-text p {
-      font-size: 0.8rem;
-      color: #666;
-    }
-
-    /* Footer */
-    footer {
-      text-align: center;
-      font-size: 0.8rem;
-      color: #aaa;
-      padding: 20px 10px;
-    }
-
-    /* Scrollbar for rows */
-    ::-webkit-scrollbar {
-      height: 6px;
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: #ccc;
-      border-radius: 10px;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: transparent;
+      border-radius: 12px;
+      margin-right: 20px;
     }
   </style>
 </head>
+
 <body>
 
-  <!-- Waitlist CTA -->
-  <div class="join-waitlist">
-    🎶 Join the IndieMusic Waitlist for Early Access!
-  </div>
+<header>
+  <h1>INDIEMUSIC</h1>
+  <nav>
+    <a href="#">Artists</a>
+    <a href="#">Recent Concerts</a>
+    <input type="text" placeholder="Search">
+  </nav>
+</header>
 
-  <!-- Header -->
-  <header>
-    <div class="logo">INDIEMUSIC</div>
-    <div class="tabs">
-      <a href="#">Artists</a>
-      <a href="#">Recent Concerts</a>
-    </div>
-    <div class="search-box">
-      🔍<input type="text" placeholder="Search">
-    </div>
-  </header>
+<main>
 
-  <!-- Main Content -->
-  <div class="section">
-    <div class="section-title">Trending Artist</div>
-    <div class="scroll-row">
-      <img src="https://via.placeholder.com/100" alt="Trending Artist 1">
-      <img src="https://via.placeholder.com/100" alt="Trending Artist 2">
-      <img src="https://via.placeholder.com/100" alt="Trending Artist 3">
+  <section class="section">
+    <h2>Trending Artists</h2>
+    <div class="grid">
+      <img class="placeholder-img" src="https://picsum.photos/200?random=1" alt="Trending Artist 1">
+      <img class="placeholder-img" src="https://picsum.photos/200?random=2" alt="Trending Artist 2">
+      <img class="placeholder-img" src="https://picsum.photos/200?random=3" alt="Trending Artist 3">
     </div>
-  </div>
+  </section>
 
-  <div class="section">
-    <div class="section-title">Hit Songs</div>
-    <div class="scroll-row">
-      <img src="https://via.placeholder.com/100" alt="Hit Song 1">
-      <img src="https://via.placeholder.com/100" alt="Hit Song 2">
+  <section class="section">
+    <h2>Hit Songs</h2>
+    <div class="grid">
+      <img class="placeholder-img" src="https://picsum.photos/200?random=4" alt="Hit Song 1">
+      <img class="placeholder-img" src="https://picsum.photos/200?random=5" alt="Hit Song 2">
     </div>
-  </div>
+  </section>
 
-  <div class="section">
-    <div class="section-title">Concerts</div>
-    <div class="scroll-row">
-      <img src="https://via.placeholder.com/100" alt="Concert 1">
-      <img src="https://via.placeholder.com/100" alt="Concert 2">
+  <section class="section">
+    <h2>Concerts</h2>
+    <div class="grid">
+      <img class="placeholder-img" src="https://picsum.photos/200?random=6" alt="Concert 1">
+      <img class="placeholder-img" src="https://picsum.photos/200?random=7" alt="Concert 2">
     </div>
-  </div>
+  </section>
 
-  <div class="section">
-    <div class="section-title">Newly Arrived Artists</div>
-    <div class="grid-row">
-      <img src="https://via.placeholder.com/150" alt="New Artist 1">
-      <img src="https://via.placeholder.com/150" alt="New Artist 2">
-      <img src="https://via.placeholder.com/150" alt="New Artist 3">
+  <section class="section">
+    <h2>Newly Arrived Artists</h2>
+    <div class="grid">
+      <img class="placeholder-img" src="https://picsum.photos/200?random=8" alt="New Artist 1">
+      <img class="placeholder-img" src="https://picsum.photos/200?random=9" alt="New Artist 2">
+      <img class="placeholder-img" src="https://picsum.photos/200?random=10" alt="New Artist 3">
     </div>
-  </div>
+  </section>
 
-  <div class="section">
-    <div class="section-title">Concert Highlights</div>
+  <section class="section">
+    <h2>Concert Highlights</h2>
     <div class="highlight-card">
-      <img src="https://via.placeholder.com/60" alt="Highlight 1">
-      <div class="highlight-text">
-        <h4>Concert Name</h4>
+      <img src="https://picsum.photos/100?random=11" alt="Highlight 1">
+      <div>
+        <h3>Concert Name</h3>
         <p>Artist Name</p>
       </div>
     </div>
     <div class="highlight-card">
-      <img src="https://via.placeholder.com/60" alt="Highlight 2">
-      <div class="highlight-text">
-        <h4>Concert Name</h4>
+      <img src="https://picsum.photos/100?random=12" alt="Highlight 2">
+      <div>
+        <h3>Concert Name</h3>
         <p>Artist Name</p>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- Footer -->
-  <footer>
-    &copy; 2025 IndieMusic. All Rights Reserved.
-  </footer>
+</main>
+
+<footer>
+  &copy; 2025 IndieMusic. All Rights Reserved.
+</footer>
 
 </body>
 </html>

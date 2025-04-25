@@ -1,534 +1,237 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IndieMusic - Platform for Independent Musicians</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IndieMusic - Home</title>
+  <style>
+    /* Base Reset */
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+    body { background: #f9f9f9; color: #222; }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* Join Waitlist CTA */
+    .join-waitlist {
+      background: linear-gradient(90deg, #6a11cb, #2575fc);
+      color: white;
+      text-align: center;
+      padding: 10px 20px;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 20px;
+      background: white;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #2575fc;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 20px;
+      font-size: 0.9rem;
+    }
+
+    .search-box {
+      border: 1px solid #ccc;
+      padding: 5px 10px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      background: #f1f1f1;
+    }
+
+    .search-box input {
+      border: none;
+      background: transparent;
+      outline: none;
+      margin-left: 5px;
+    }
+
+    /* Sections */
+    .section {
+      padding: 20px;
+    }
+
+    .section-title {
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+
+    .scroll-row {
+      display: flex;
+      overflow-x: auto;
+      gap: 15px;
+      padding-bottom: 10px;
+    }
+
+    .scroll-row img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 10px;
+      flex-shrink: 0;
+    }
+
+    .grid-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: 15px;
+    }
+
+    .grid-row img {
+      width: 100%;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+
+    .highlight-card {
+      background: white;
+      padding: 15px;
+      margin-bottom: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      display: flex;
+      gap: 15px;
+      align-items: center;
+    }
+
+    .highlight-card img {
+      width: 60px;
+      height: 60px;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+
+    .highlight-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .highlight-text h4 {
+      font-size: 1rem;
+    }
+
+    .highlight-text p {
+      font-size: 0.8rem;
+      color: #666;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      font-size: 0.8rem;
+      color: #aaa;
+      padding: 20px 10px;
+    }
+
+    /* Scrollbar for rows */
+    ::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #ccc;
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+  </style>
 </head>
 <body>
-    <!-- Top Banner -->
-    <div class="top-banner">
-        <p>Join the IndieMusic Waitlist for Early Access! <a href="#waitlist">Sign Up</a></p>
+
+  <!-- Waitlist CTA -->
+  <div class="join-waitlist">
+     Join the IndieMusic Waitlist for Early Access!
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="logo">INDIEMUSIC</div>
+    <div class="tabs">
+      <a href="#">Artists</a>
+      <a href="#">Recent Concerts</a>
+      <a href="discover.html">Discover</a>
+      <a href="upload.html">Upload</a>
     </div>
+    <div class="search-box">
+      🔍<input type="text" placeholder="Search">
+    </div>
+  </header>
 
-    <!-- Navigation -->
-    <header>
-        <div class="logo">
-            <a href="index.html">INDIEMUSIC</a>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="#artists">Artists</a></li>
-                <li><a href="#recent-concerts">Recent Concerts</a></li>
-                <li><a href="#discover">Discover</a></li>
-                <li><a href="#upload">Upload</a></li>
-                <li><a href="#play">Play</a></li>
-            </ul>
-        </nav>
-        <div class="search-container">
-            <input type="text" placeholder="Search...">
-            <button type="submit"><i class="fa fa-search"></i></button>
-        </div>
-    </header>
+<main>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Discover and Support Independent Musicians</h1>
-            <p>The platform where indie artists get the attention they deserve</p>
-            <div class="hero-buttons">
-                <a href="#discover" class="btn primary">Discover Music</a>
-                <a href="#upload" class="btn secondary">Upload Your Music</a>
-            </div>
-        </div>
-    </section>
+  <section class="section">
+    <h2>Trending Artists</h2>
+    <div class="grid">
+      <img class="placeholder-img" src="https://picsum.photos/200?random=1" alt="Trending Artist 1">
+      <img class="placeholder-img" src="https://picsum.photos/200?random=2" alt="Trending Artist 2">
+      <img class="placeholder-img" src="https://picsum.photos/200?random=3" alt="Trending Artist 3">
+    </div>
+  </section>
 
-    <!-- Trending Artists Section -->
-    <section id="trending-artists" class="section">
-        <div class="container">
-            <h2>Trending Artists</h2>
-            <div class="artist-grid">
-                <div class="artist-card">
-                    <img src="images/artist1.jpg" alt="Artist 1">
-                    <h3>Ambient Waves</h3>
-                    <p>Experimental • Ambient</p>
-                </div>
-                <div class="artist-card">
-                    <img src="images/artist2.jpg" alt="Artist 2">
-                    <h3>Crystal Flow</h3>
-                    <p>Electronic • Chill</p>
-                </div>
-                <div class="artist-card">
-                    <img src="images/artist3.jpg" alt="Artist 3">
-                    <h3>Lighthouse</h3>
-                    <p>Folk • Acoustic</p>
-                </div>
-                <div class="artist-card">
-                    <img src="images/artist4.jpg" alt="Artist 4">
-                    <h3>Midnight Echo</h3>
-                    <p>Alternative • Rock</p>
-                </div>
-            </div>
-            <a href="#more-artists" class="see-more">See More Artists</a>
-        </div>
-    </section>
+  <section class="section">
+    <h2>Hit Songs</h2>
+    <div class="grid">
+      <img class="placeholder-img" src="https://picsum.photos/200?random=4" alt="Hit Song 1">
+      <img class="placeholder-img" src="https://picsum.photos/200?random=5" alt="Hit Song 2">
+    </div>
+  </section>
 
-    <!-- Hit Songs Section -->
-    <section id="hit-songs" class="section">
-        <div class="container">
-            <h2>Hit Songs</h2>
-            <div class="songs-grid">
-                <div class="song-card">
-                    <div class="song-image">
-                        <img src="images/song1.jpg" alt="Song 1">
-                        <div class="play-overlay">
-                            <i class="fas fa-play"></i>
-                        </div>
-                    </div>
-                    <h3>Coastal Dreams</h3>
-                    <p>Lighthouse</p>
-                </div>
-                <div class="song-card">
-                    <div class="song-image">
-                        <img src="images/song2.jpg" alt="Song 2">
-                        <div class="play-overlay">
-                            <i class="fas fa-play"></i>
-                        </div>
-                    </div>
-                    <h3>Urban Sunset</h3>
-                    <p>Golden Bridge</p>
-                </div>
-                <div class="song-card">
-                    <div class="song-image">
-                        <img src="images/song3.jpg" alt="Song 3">
-                        <div class="play-overlay">
-                            <i class="fas fa-play"></i>
-                        </div>
-                    </div>
-                    <h3>Midnight Walk</h3>
-                    <p>Night Owls</p>
-                </div>
-                <div class="song-card">
-                    <div class="song-image">
-                        <img src="images/song4.jpg" alt="Song 4">
-                        <div class="play-overlay">
-                            <i class="fas fa-play"></i>
-                        </div>
-                    </div>
-                    <h3>Mountain Echo</h3>
-                    <p>Nature Sounds</p>
-                </div>
-            </div>
-            <a href="#more-songs" class="see-more">See More Songs</a>
-        </div>
-    </section>
+  <section class="section">
+    <h2>Concerts</h2>
+    <div class="grid">
+      <img class="placeholder-img" src="https://picsum.photos/200?random=6" alt="Concert 1">
+      <img class="placeholder-img" src="https://picsum.photos/200?random=7" alt="Concert 2">
+    </div>
+  </section>
 
-    <!-- Concerts Section -->
-    <section id="concerts" class="section">
-        <div class="container">
-            <h2>Upcoming Concerts</h2>
-            <div class="concerts-grid">
-                <div class="concert-card">
-                    <img src="images/concert1.jpg" alt="Concert 1">
-                    <div class="concert-info">
-                        <h3>Forest Retreat Festival</h3>
-                        <p class="date">May 15, 2025</p>
-                        <p class="location">Emerald Forest, OR</p>
-                        <a href="#details" class="btn small">Details</a>
-                    </div>
-                </div>
-                <div class="concert-card">
-                    <img src="images/concert2.jpg" alt="Concert 2">
-                    <div class="concert-info">
-                        <h3>Sunset Sessions</h3>
-                        <p class="date">June 3, 2025</p>
-                        <p class="location">Beach Park, CA</p>
-                        <a href="#details" class="btn small">Details</a>
-                    </div>
-                </div>
-                <div class="concert-card">
-                    <img src="images/concert3.jpg" alt="Concert 3">
-                    <div class="concert-info">
-                        <h3>Urban Unplugged</h3>
-                        <p class="date">June 17, 2025</p>
-                        <p class="location">Downtown Venue, NY</p>
-                        <a href="#details" class="btn small">Details</a>
-                    </div>
-                </div>
-            </div>
-            <a href="#more-concerts" class="see-more">See More Concerts</a>
-        </div>
-    </section>
+  <section class="section">
+    <h2>Newly Arrived Artists</h2>
+    <div class="grid">
+      <img class="placeholder-img" src="https://picsum.photos/200?random=8" alt="New Artist 1">
+      <img class="placeholder-img" src="https://picsum.photos/200?random=9" alt="New Artist 2">
+      <img class="placeholder-img" src="https://picsum.photos/200?random=10" alt="New Artist 3">
+    </div>
+  </section>
 
-    <!-- Newly Arrived Artists Section -->
-    <section id="newly-arrived" class="section">
-        <div class="container">
-            <h2>Newly Arrived Artists</h2>
-            <div class="artist-grid">
-                <div class="artist-card">
-                    <img src="images/new-artist1.jpg" alt="New Artist 1">
-                    <h3>Waterfall</h3>
-                    <p>Ambient • Nature</p>
-                </div>
-                <div class="artist-card">
-                    <img src="images/new-artist2.jpg" alt="New Artist 2">
-                    <h3>Desert Sounds</h3>
-                    <p>Experimental • Acoustic</p>
-                </div>
-                <div class="artist-card">
-                    <img src="images/new-artist3.jpg" alt="New Artist 3">
-                    <h3>Night Sky</h3>
-                    <p>Electronic • Ambient</p>
-                </div>
-            </div>
-            <a href="#more-new-artists" class="see-more">See More Artists</a>
-        </div>
-    </section>
+  <section class="section">
+    <h2>Concert Highlights</h2>
+    <div class="highlight-card">
+      <img src="https://picsum.photos/100?random=11" alt="Highlight 1">
+      <div>
+        <h3>Concert Name</h3>
+        <p>Artist Name</p>
+      </div>
+    </div>
+    <div class="highlight-card">
+      <img src="https://picsum.photos/100?random=12" alt="Highlight 2">
+      <div>
+        <h3>Concert Name</h3>
+        <p>Artist Name</p>
+      </div>
+    </div>
+  </section>
 
-    <!-- Concert Highlights Section -->
-    <section id="concert-highlights" class="section">
-        <div class="container">
-            <h2>Concert Highlights</h2>
-            <div class="highlights-grid">
-                <div class="highlight-card">
-                    <img src="images/highlight1.jpg" alt="Highlight 1">
-                    <div class="highlight-info">
-                        <h3>Forest Festival</h3>
-                        <p>Artist Name</p>
-                        <a href="#watch" class="btn small">Watch</a>
-                    </div>
-                </div>
-                <div class="highlight-card">
-                    <img src="images/highlight2.jpg" alt="Highlight 2">
-                    <div class="highlight-info">
-                        <h3>Beach Concert</h3>
-                        <p>Artist Name</p>
-                        <a href="#watch" class="btn small">Watch</a>
-                    </div>
-                </div>
-            </div>
-            <a href="#more-highlights" class="see-more">See More Highlights</a>
-        </div>
-    </section>
+</main>
 
-    <!-- Play Section (Reels) -->
-    <section id="play" class="section">
-        <div class="container">
-            <h2>Play</h2>
-            <p class="section-description">Discover short music clips from indie artists</p>
-            <div class="reels-container">
-                <div class="reel">
-                    <div class="reel-video-container">
-                        <video poster="images/reel1.jpg" class="reel-video">
-                            <source src="videos/reel1.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                        <div class="reel-overlay">
-                            <button class="play-btn"><i class="fas fa-play"></i></button>
-                            <div class="reel-info">
-                                <h3>Acoustic Session</h3>
-                                <p>Mountain Echo</p>
-                            </div>
-                            <div class="reel-actions">
-                                <button class="like-btn"><i class="fas fa-heart"></i></button>
-                                <button class="comment-btn"><i class="fas fa-comment"></i></button>
-                                <button class="share-btn"><i class="fas fa-share"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="reel">
-                    <div class="reel-video-container">
-                        <video poster="images/reel2.jpg" class="reel-video">
-                            <source src="videos/reel2.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                        <div class="reel-overlay">
-                            <button class="play-btn"><i class="fas fa-play"></i></button>
-                            <div class="reel-info">
-                                <h3>Studio Session</h3>
-                                <p>Crystal Flow</p>
-                            </div>
-                            <div class="reel-actions">
-                                <button class="like-btn"><i class="fas fa-heart"></i></button>
-                                <button class="comment-btn"><i class="fas fa-comment"></i></button>
-                                <button class="share-btn"><i class="fas fa-share"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="reel">
-                    <div class="reel-video-container">
-                        <video poster="images/reel3.jpg" class="reel-video">
-                            <source src="videos/reel3.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                        <div class="reel-overlay">
-                            <button class="play-btn"><i class="fas fa-play"></i></button>
-                            <div class="reel-info">
-                                <h3>Live Performance</h3>
-                                <p>Lighthouse</p>
-                            </div>
-                            <div class="reel-actions">
-                                <button class="like-btn"><i class="fas fa-heart"></i></button>
-                                <button class="comment-btn"><i class="fas fa-comment"></i></button>
-                                <button class="share-btn"><i class="fas fa-share"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <a href="#more-reels" class="see-more">See More Reels</a>
-        </div>
-    </section>
+<footer>
+  &copy; 2025 IndieMusic. All Rights Reserved.
+</footer>
 
-    <!-- Smart Discovery Section -->
-    <section id="smart-discovery" class="section">
-        <div class="container">
-            <h2>Smarter Discovery</h2>
-            <p class="section-description">Find music that matches your taste</p>
-            <div class="discovery-categories">
-                <div class="category">
-                    <h3>Folk Rock</h3>
-                    <div class="tag-cloud">
-                        <span class="tag">Acoustic</span>
-                        <span class="tag">Storytelling</span>
-                        <span class="tag">Harmonica</span>
-                        <span class="tag">Fingerstyle</span>
-                    </div>
-                    <div class="discovery-items">
-                        <div class="discovery-item">
-                            <img src="images/folk1.jpg" alt="Folk Artist 1">
-                            <div class="discovery-info">
-                                <h4>Mountain Tales</h4>
-                                <p>By Woodland Echoes</p>
-                            </div>
-                            <button class="play-mini"><i class="fas fa-play"></i></button>
-                        </div>
-                        <div class="discovery-item">
-                            <img src="images/folk2.jpg" alt="Folk Artist 2">
-                            <div class="discovery-info">
-                                <h4>River Songs</h4>
-                                <p>By Sarah Waters</p>
-                            </div>
-                            <button class="play-mini"><i class="fas fa-play"></i></button>
-                        </div>
-                    </div>
-                </div>
-                <div class="category">
-                    <h3>Activism-Driven</h3>
-                    <div class="tag-cloud">
-                        <span class="tag">Protest</span>
-                        <span class="tag">Social Change</span>
-                        <span class="tag">Justice</span>
-                        <span class="tag">Empowerment</span>
-                    </div>
-                    <div class="discovery-items">
-                        <div class="discovery-item">
-                            <img src="images/activism1.jpg" alt="Activism Artist 1">
-                            <div class="discovery-info">
-                                <h4>Rise Up</h4>
-                                <p>By The Advocates</p>
-                            </div>
-                            <button class="play-mini"><i class="fas fa-play"></i></button>
-                        </div>
-                        <div class="discovery-item">
-                            <img src="images/activism2.jpg" alt="Activism Artist 2">
-                            <div class="discovery-info">
-                                <h4>Voices United</h4>
-                                <p>By Change Makers</p>
-                            </div>
-                            <button class="play-mini"><i class="fas fa-play"></i></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Community Section -->
-    <section id="community" class="section">
-        <div class="container">
-            <h2>Join the Community</h2>
-            <p class="section-description">Turning listeners into a movement</p>
-            <div class="community-grid">
-                <div class="community-card">
-                    <i class="fas fa-microphone-alt"></i>
-                    <h3>Behind-the-Scenes</h3>
-                    <p>Get exclusive access to artist studios, recording sessions, and creative processes</p>
-                </div>
-                <div class="community-card">
-                    <i class="fas fa-comments"></i>
-                    <h3>Deep-Dive Discussions</h3>
-                    <p>Join conversations about music, creativity, and social impact</p>
-                </div>
-                <div class="community-card">
-                    <i class="fas fa-calendar-alt"></i>
-                    <h3>Exclusive Events</h3>
-                    <p>Virtual and in-person events only for community members</p>
-                </div>
-                <div class="community-card">
-                    <i class="fas fa-users"></i>
-                    <h3>Fan Collectives</h3>
-                    <p>Connect with other fans who share your musical interests</p>
-                </div>
-            </div>
-            <a href="#join-community" class="btn primary center">Join the Community</a>
-        </div>
-    </section>
-
-    <!-- Live Show Waitlist Section -->
-    <section id="waitlist" class="section">
-        <div class="container">
-            <h2>Live Show Waitlist</h2>
-            <p class="section-description">Help your favorite artists get booked in your city</p>
-            <div class="waitlist-container">
-                <div class="artist-demand">
-                    <div class="artist-demand-card">
-                        <img src="images/artist-demand1.jpg" alt="Artist Demand 1">
-                        <div class="demand-info">
-                            <h3>Lighthouse</h3>
-                            <p>245 fans waiting in Seattle, WA</p>
-                            <div class="progress-bar">
-                                <div class="progress" style="width: 70%;"></div>
-                            </div>
-                            <p class="status">70% to sold-out threshold</p>
-                        </div>
-                        <button class="btn small">Join Waitlist</button>
-                    </div>
-                    <div class="artist-demand-card">
-                        <img src="images/artist-demand2.jpg" alt="Artist Demand 2">
-                        <div class="demand-info">
-                            <h3>Crystal Flow</h3>
-                            <p>189 fans waiting in Portland, OR</p>
-                            <div class="progress-bar">
-                                <div class="progress" style="width: 55%;"></div>
-                            </div>
-                            <p class="status">55% to sold-out threshold</p>
-                        </div>
-                        <button class="btn small">Join Waitlist</button>
-                    </div>
-                </div>
-                <div class="venue-signup">
-                    <h3>Are you a venue?</h3>
-                    <p>See which artists have fans waiting in your city</p>
-                    <button class="btn secondary">Venue Sign Up</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Monetization Section -->
-    <section id="monetization" class="section">
-        <div class="container">
-            <h2>Beyond Streaming Revenue</h2>
-            <p class="section-description">Support artists directly and get exclusive benefits</p>
-            <div class="monetization-grid">
-                <div class="monetization-card">
-                    <i class="fas fa-hand-holding-usd"></i>
-                    <h3>Direct Tipping</h3>
-                    <p>Send tips directly to artists you love</p>
-                </div>
-                <div class="monetization-card">
-                    <i class="fas fa-music"></i>
-                    <h3>Exclusive Pre-releases</h3>
-                    <p>Get early access to new music</p>
-                </div>
-                <div class="monetization-card">
-                    <i class="fas fa-guitar"></i>
-                    <h3>Virtual Jam Sessions</h3>
-                    <p>Join online music sessions with your favorite artists</p>
-                </div>
-                <div class="monetization-card">
-                    <i class="fas fa-tshirt"></i>
-                    <h3>Merch Drops</h3>
-                    <p>Get exclusive merchandise from indie artists</p>
-                </div>
-            </div>
-            <a href="#support" class="btn primary center">Start Supporting</a>
-        </div>
-    </section>
-
-    <!-- Upload Section -->
-    <section id="upload" class="section">
-        <div class="container">
-            <h2>Upload Your Music</h2>
-            <p class="section-description">Join thousands of independent artists on IndieMusic</p>
-            <div class="upload-steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <h3>Create an Account</h3>
-                    <p>Sign up as an artist and set up your profile</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <h3>Upload Your Tracks</h3>
-                    <p>Share your original music with the world</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <h3>Connect with Fans</h3>
-                    <p>Build your audience and receive direct support</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">4</div>
-                    <h3>Grow Your Career</h3>
-                    <p>Access opportunities for live shows and collaborations</p>
-                </div>
-            </div>
-            <a href="#artist-signup" class="btn primary center">Start Uploading</a>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="footer-container">
-            <div class="footer-section">
-                <h3>IndieMusic</h3>
-                <p>The platform where independent musicians get the attention they deserve</p>
-                <div class="social-icons">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
-                </div>
-            </div>
-            <div class="footer-section">
-                <h3>Quick Links</h3>
-                <ul>
-                    <li><a href="#about">About Us</a></li>
-                    <li><a href="#artists">Artists</a></li>
-                    <li><a href="#concerts">Concerts</a></li>
-                    <li><a href="#play">Play</a></li>
-                    <li><a href="#upload">Upload Music</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Resources</h3>
-                <ul>
-                    <li><a href="#help">Help Center</a></li>
-                    <li><a href="#terms">Terms of Service</a></li>
-                    <li><a href="#privacy">Privacy Policy</a></li>
-                    <li><a href="#copyright">Copyright Info</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Newsletter</h3>
-                <p>Stay updated with the latest indie music news</p>
-                <form class="newsletter-form">
-                    <input type="email" placeholder="Your email address">
-                    <button type="submit">Subscribe</button>
-                </form>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 IndieMusic. All Rights Reserved.</p>
-        </div>
-    </footer>
-
-    <!-- JavaScript -->
-    <script src="script.js"></script>
 </body>
 </html>

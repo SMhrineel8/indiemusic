@@ -3,238 +3,167 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>IndieMusic | Discover Independent Music</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <title>IndieMusic - Discover Live Indie Shows</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    /* Reset & Base Styles */
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+    body { background: #f5f7fa; color: #333; }
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #f9f9f9;
-      color: #333;
-    }
+    a { text-decoration: none; color: inherit; }
 
+    /* Header */
     header {
-      background: linear-gradient(90deg, #6e00ff, #00b7ff);
-      padding: 1.5rem 2rem;
-      color: white;
-      text-align: center;
+      background: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 30px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     }
 
-    nav {
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #2d7fea;
+    }
+
+    nav ul {
+      list-style: none;
       display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-      margin-top: 1rem;
-      font-weight: 500;
+      gap: 25px;
     }
 
     nav a {
-      color: white;
-      text-decoration: none;
-      font-size: 1rem;
-      padding: 0.5rem 1rem;
-      border-radius: 6px;
-      transition: background 0.3s ease;
+      font-weight: 500;
+      transition: 0.2s;
     }
 
     nav a:hover {
-      background: rgba(255, 255, 255, 0.2);
+      color: #6a11cb;
     }
 
+    /* Hero Section */
     .hero {
-      background: linear-gradient(90deg, #6e00ff, #00b7ff);
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
       color: white;
+      padding: 80px 20px;
       text-align: center;
-      padding: 6rem 2rem;
+      border-radius: 0 0 20px 20px;
     }
 
     .hero h1 {
-      font-size: 2.8rem;
-      margin-bottom: 1rem;
+      font-size: 3rem;
+      margin-bottom: 20px;
     }
 
     .hero p {
       font-size: 1.2rem;
-      margin-bottom: 2rem;
-      max-width: 600px;
-      margin-inline: auto;
+      max-width: 700px;
+      margin: 0 auto 30px;
+      opacity: 0.9;
     }
 
-    .hero button {
+    .hero a {
       background: white;
-      color: #6e00ff;
-      padding: 0.75rem 2rem;
+      color: #6a11cb;
+      padding: 12px 25px;
       font-weight: bold;
-      font-size: 1rem;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all 0.3s ease;
+      border-radius: 30px;
+      transition: 0.3s;
+      display: inline-block;
     }
 
-    .hero button:hover {
-      background: #f0f0f0;
+    .hero a:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     }
 
-    .section {
-      padding: 4rem 2rem;
-      text-align: center;
-    }
-
-    .section h2 {
-      font-size: 2rem;
-      margin-bottom: 2rem;
-    }
-
-    .card-grid {
+    /* Feature Section */
+    .features {
+      max-width: 1200px;
+      margin: 60px auto;
+      padding: 0 20px;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 2rem;
-      max-width: 1000px;
-      margin: 0 auto;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
     }
 
-    .card {
+    .feature-card {
       background: white;
-      padding: 1.5rem;
-      border-radius: 12px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.05);
-      text-align: left;
-    }
-
-    .card h3 {
-      font-size: 1.2rem;
-      margin-bottom: 0.25rem;
-    }
-
-    .card p {
-      font-size: 0.95rem;
-      color: #555;
-      margin-bottom: 1rem;
-    }
-
-    .card button {
-      background: #6e00ff;
-      color: white;
-      padding: 0.5rem 1rem;
-      border: none;
-      border-radius: 6px;
-      font-size: 0.9rem;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-
-    .card button:hover {
-      background: #5800d6;
-    }
-
-    .how-it-works {
-      background: #f1f5f9;
-    }
-
-    .steps {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 2rem;
-      max-width: 1000px;
-      margin: 2rem auto 0;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
       text-align: center;
     }
 
-    .step {
-      padding: 1rem;
+    .feature-card h3 {
+      margin-bottom: 15px;
+      font-size: 1.3rem;
     }
 
-    .step img {
-      width: 48px;
-      margin-bottom: 1rem;
+    .feature-card p {
+      color: #666;
     }
 
-    .step h4 {
-      font-size: 1.1rem;
-      margin-bottom: 0.5rem;
-    }
-
+    /* Footer */
     footer {
-      background: #eee;
-      padding: 2rem;
+      background: #2d7fea;
+      color: white;
+      padding: 30px;
       text-align: center;
+      margin-top: 60px;
+    }
+
+    footer p {
+      margin-top: 10px;
       font-size: 0.9rem;
-      color: #777;
+      opacity: 0.8;
     }
   </style>
 </head>
 <body>
 
+  <!-- Header -->
   <header>
-    <h1>IndieMusic</h1>
-    <p>Discover and support independent musicians</p>
+    <div class="logo">IndieMusic</div>
     <nav>
-      <a href="index.html">Home</a>
-      <a href="discover.html">Discover</a>
-      <a href="upload.html">Upload Music</a>
-      <a href="play.html">Play</a>
-      <a href="#">About</a>
-      <a href="#">Contact</a>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/waitlist.html">Live Shows</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
     </nav>
   </header>
 
+  <!-- Hero Section -->
   <section class="hero">
-    <h1>Your Music, Your Way</h1>
-    <p>IndieMusic is where independent musicians thrive and fans discover authentic sounds, directly from the source.</p>
-    <button onclick="location.href='#'">🎧 Discover Music</button>
+    <h1>Discover Indie Artists. Experience Live Music.</h1>
+    <p>Join the movement that’s reshaping India’s independent music scene—one epic gig at a time.</p>
+    <a href="/waitlist.html">Join the Waitlist</a>
   </section>
 
-  <section class="section">
-    <h2>Featured Artists</h2>
-    <div class="card-grid">
-      <div class="card">
-        <h3>Laura Ray</h3>
-        <p>Alternative Folk</p>
-        <button>Play Music</button>
-      </div>
-      <div class="card">
-        <h3>Metro Waves</h3>
-        <p>Indie Rock</p>
-        <button>Play Music</button>
-      </div>
-      <div class="card">
-        <h3>Echo Chamber</h3>
-        <p>Electronic</p>
-        <button>Play Music</button>
-      </div>
+  <!-- Feature Section -->
+  <section id="features" class="features">
+    <div class="feature-card">
+      <h3>🔥 Hottest Indie Gigs</h3>
+      <p>Get early access to the most exciting live shows by rising artists in your city.</p>
+    </div>
+    <div class="feature-card">
+      <h3>📍 City-Based Curation</h3>
+      <p>See where your favorite artists are playing next and book your spot before it's sold out.</p>
+    </div>
+    <div class="feature-card">
+      <h3>📈 Build Artist Momentum</h3>
+      <p>Artists get added to the lineup based on demand from fans—like you.</p>
     </div>
   </section>
 
-  <section class="section how-it-works">
-    <h2>How It Works</h2>
-    <div class="steps">
-      <div class="step">
-        <img src="https://img.icons8.com/ios-filled/50/upload.png" alt="Upload">
-        <h4>Upload Your Music</h4>
-        <p>Share your sound with a vibrant indie community.</p>
-      </div>
-      <div class="step">
-        <img src="https://img.icons8.com/ios-filled/50/connected-people.png" alt="Fans">
-        <h4>Connect with Fans</h4>
-        <p>Build a following and engage directly with listeners.</p>
-      </div>
-      <div class="step">
-        <img src="https://img.icons8.com/ios-filled/50/growth-graph.png" alt="Growth">
-        <h4>Grow Your Presence</h4>
-        <p>Get featured, discovered, and promoted globally.</p>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    &copy; 2025 IndieMusic. All rights reserved.
+  <!-- Footer -->
+  <footer id="contact">
+    <h2>🎶 IndieMusic</h2>
+    <p>Made with ❤️ in India for indie fans worldwide.</p>
+    <p>&copy; 2025 IndieMusic. All rights reserved.</p>
   </footer>
 
 </body>

@@ -1,169 +1,232 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>IndieMusic - Discover Live Indie Shows</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IndieMusic - Home</title>
   <style>
-    /* Reset & Base Styles */
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-    body { background: #f5f7fa; color: #333; }
+    /* Base Reset */
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+    body { background: #f9f9f9; color: #222; }
 
     a { text-decoration: none; color: inherit; }
 
+    /* Join Waitlist CTA */
+    .join-waitlist {
+      background: linear-gradient(90deg, #6a11cb, #2575fc);
+      color: white;
+      text-align: center;
+      padding: 10px 20px;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+
     /* Header */
     header {
-      background: #fff;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      padding: 20px 30px;
+      justify-content: space-between;
+      padding: 15px 20px;
+      background: white;
       box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     }
 
     .logo {
-      font-size: 1.8rem;
+      font-size: 1.5rem;
       font-weight: bold;
-      color: #2d7fea;
+      color: #2575fc;
     }
 
-    nav ul {
-      list-style: none;
+    .tabs {
       display: flex;
-      gap: 25px;
+      gap: 20px;
+      font-size: 0.9rem;
     }
 
-    nav a {
-      font-weight: 500;
-      transition: 0.2s;
+    .search-box {
+      border: 1px solid #ccc;
+      padding: 5px 10px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      background: #f1f1f1;
     }
 
-    nav a:hover {
-      color: #6a11cb;
+    .search-box input {
+      border: none;
+      background: transparent;
+      outline: none;
+      margin-left: 5px;
     }
 
-    /* Hero Section */
-    .hero {
-      background: linear-gradient(135deg, #6a11cb, #2575fc);
-      color: white;
-      padding: 80px 20px;
-      text-align: center;
-      border-radius: 0 0 20px 20px;
+    /* Sections */
+    .section {
+      padding: 20px;
     }
 
-    .hero h1 {
-      font-size: 3rem;
-      margin-bottom: 20px;
-    }
-
-    .hero p {
+    .section-title {
       font-size: 1.2rem;
-      max-width: 700px;
-      margin: 0 auto 30px;
-      opacity: 0.9;
-    }
-
-    .hero a {
-      background: white;
-      color: #6a11cb;
-      padding: 12px 25px;
-      font-weight: bold;
-      border-radius: 30px;
-      transition: 0.3s;
-      display: inline-block;
-    }
-
-    .hero a:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    }
-
-    /* Feature Section */
-    .features {
-      max-width: 1200px;
-      margin: 60px auto;
-      padding: 0 20px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 30px;
-    }
-
-    .feature-card {
-      background: white;
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-      text-align: center;
-    }
-
-    .feature-card h3 {
       margin-bottom: 15px;
-      font-size: 1.3rem;
+      font-weight: 600;
     }
 
-    .feature-card p {
+    .scroll-row {
+      display: flex;
+      overflow-x: auto;
+      gap: 15px;
+      padding-bottom: 10px;
+    }
+
+    .scroll-row img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 10px;
+      flex-shrink: 0;
+    }
+
+    .grid-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: 15px;
+    }
+
+    .grid-row img {
+      width: 100%;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+
+    .highlight-card {
+      background: white;
+      padding: 15px;
+      margin-bottom: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      display: flex;
+      gap: 15px;
+      align-items: center;
+    }
+
+    .highlight-card img {
+      width: 60px;
+      height: 60px;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+
+    .highlight-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .highlight-text h4 {
+      font-size: 1rem;
+    }
+
+    .highlight-text p {
+      font-size: 0.8rem;
       color: #666;
     }
 
     /* Footer */
     footer {
-      background: #2d7fea;
-      color: white;
-      padding: 30px;
       text-align: center;
-      margin-top: 60px;
+      font-size: 0.8rem;
+      color: #aaa;
+      padding: 20px 10px;
     }
 
-    footer p {
-      margin-top: 10px;
-      font-size: 0.9rem;
-      opacity: 0.8;
+    /* Scrollbar for rows */
+    ::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #ccc;
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
     }
   </style>
 </head>
 <body>
 
+  <!-- Waitlist CTA -->
+  <div class="join-waitlist">
+    🎶 Join the IndieMusic Waitlist for Early Access!
+  </div>
+
   <!-- Header -->
   <header>
-    <div class="logo">IndieMusic</div>
-    <nav>
-      <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/waitlist.html">Live Shows</a></li>
-        <li><a href="#features">Features</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
+    <div class="logo">INDIEMUSIC</div>
+    <div class="tabs">
+      <a href="#">Artists</a>
+      <a href="#">Recent Concerts</a>
+    </div>
+    <div class="search-box">
+      🔍<input type="text" placeholder="Search">
+    </div>
   </header>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <h1>Discover Indie Artists. Experience Live Music.</h1>
-    <p>Join the movement that’s reshaping India’s independent music scene—one epic gig at a time.</p>
-    <a href="/waitlist.html">Join the Waitlist</a>
-  </section>
+  <!-- Main Content -->
+  <div class="section">
+    <div class="section-title">Trending Artist</div>
+    <div class="scroll-row">
+      <img src="https://via.placeholder.com/100" alt="Trending Artist 1">
+      <img src="https://via.placeholder.com/100" alt="Trending Artist 2">
+      <img src="https://via.placeholder.com/100" alt="Trending Artist 3">
+    </div>
+  </div>
 
-  <!-- Feature Section -->
-  <section id="features" class="features">
-    <div class="feature-card">
-      <h3>🔥 Hottest Indie Gigs</h3>
-      <p>Get early access to the most exciting live shows by rising artists in your city.</p>
+  <div class="section">
+    <div class="section-title">Hit Songs</div>
+    <div class="scroll-row">
+      <img src="https://via.placeholder.com/100" alt="Hit Song 1">
+      <img src="https://via.placeholder.com/100" alt="Hit Song 2">
     </div>
-    <div class="feature-card">
-      <h3>📍 City-Based Curation</h3>
-      <p>See where your favorite artists are playing next and book your spot before it's sold out.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Concerts</div>
+    <div class="scroll-row">
+      <img src="https://via.placeholder.com/100" alt="Concert 1">
+      <img src="https://via.placeholder.com/100" alt="Concert 2">
     </div>
-    <div class="feature-card">
-      <h3>📈 Build Artist Momentum</h3>
-      <p>Artists get added to the lineup based on demand from fans—like you.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Newly Arrived Artists</div>
+    <div class="grid-row">
+      <img src="https://via.placeholder.com/150" alt="New Artist 1">
+      <img src="https://via.placeholder.com/150" alt="New Artist 2">
+      <img src="https://via.placeholder.com/150" alt="New Artist 3">
     </div>
-  </section>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Concert Highlights</div>
+    <div class="highlight-card">
+      <img src="https://via.placeholder.com/60" alt="Highlight 1">
+      <div class="highlight-text">
+        <h4>Concert Name</h4>
+        <p>Artist Name</p>
+      </div>
+    </div>
+    <div class="highlight-card">
+      <img src="https://via.placeholder.com/60" alt="Highlight 2">
+      <div class="highlight-text">
+        <h4>Concert Name</h4>
+        <p>Artist Name</p>
+      </div>
+    </div>
+  </div>
 
   <!-- Footer -->
-  <footer id="contact">
-    <h2>🎶 IndieMusic</h2>
-    <p>Made with ❤️ in India for indie fans worldwide.</p>
-    <p>&copy; 2025 IndieMusic. All rights reserved.</p>
+  <footer>
+    &copy; 2025 IndieMusic. All Rights Reserved.
   </footer>
 
 </body>

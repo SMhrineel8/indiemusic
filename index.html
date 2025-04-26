@@ -228,7 +228,9 @@
     </div>
   </section>
   
-<!-- Spotify Style Mini Player Start -->
+<!-- Spotify Style Mini Player (Upgraded) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
 <div id="mini-player" style="
   position: fixed;
   bottom: 0;
@@ -246,7 +248,7 @@
 ">
   <!-- Song Info -->
   <div style="display: flex; align-items: center; flex: 1;">
-    <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4" alt="Song Cover" style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px; margin-right: 15px;">
+    <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4" alt="Song Cover" style="width: 55px; height: 55px; object-fit: cover; border-radius: 6px; margin-right: 15px;">
     <div>
       <div style="font-weight: bold; font-size: 14px;">Lost in Melody</div>
       <div style="font-size: 12px; color: #b3b3b3;">Armaan Malik</div>
@@ -254,26 +256,37 @@
   </div>
 
   <!-- Player Controls -->
-  <div style="display: flex; align-items: center; flex: 2; flex-direction: column;">
+  <div style="flex: 2; display: flex; flex-direction: column; align-items: center;">
     <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 5px;">
-      <button onclick="previousSong()" style="background: none; border: none; color: white; margin: 0 10px; font-size: 20px;">⏮️</button>
+      <button onclick="previousSong()" style="background: none; border: none; color: white; margin: 0 12px; font-size: 20px; cursor: pointer;">
+        <i class="fas fa-backward"></i>
+      </button>
       <button id="playPauseBtn" style="
-        background: none;
-        border: 2px solid white;
+        background: #1db954;
+        border: none;
         border-radius: 50%;
-        width: 40px;
-        height: 40px;
+        width: 45px;
+        height: 45px;
         color: white;
-        font-size: 16px;
+        font-size: 18px;
         cursor: pointer;
-        margin: 0 10px;
-      ">⏸️</button>
-      <button onclick="nextSong()" style="background: none; border: none; color: white; margin: 0 10px; font-size: 20px;">⏭️</button>
-      <button onclick="repeatSong()" style="background: none; border: none; color: white; margin: 0 10px; font-size: 20px;">🔁</button>
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 15px;
+      ">
+        <i class="fas fa-pause"></i>
+      </button>
+      <button onclick="nextSong()" style="background: none; border: none; color: white; margin: 0 12px; font-size: 20px; cursor: pointer;">
+        <i class="fas fa-forward"></i>
+      </button>
+      <button onclick="repeatSong()" style="background: none; border: none; color: white; margin: 0 12px; font-size: 20px; cursor: pointer;">
+        <i class="fas fa-redo"></i>
+      </button>
     </div>
 
     <!-- Progress Bar -->
-    <div style="width: 100%; display: flex; align-items: center;">
+    <div style="width: 90%; display: flex; align-items: center;">
       <span id="currentTime" style="font-size: 10px; color: #b3b3b3;">0:00</span>
       <div style="flex: 1; height: 4px; background: #404040; margin: 0 10px; position: relative; border-radius: 2px;">
         <div id="progress" style="height: 100%; width: 30%; background: #1db954; border-radius: 2px;"></div>
@@ -282,7 +295,8 @@
     </div>
   </div>
 
-  <!-- Volume Control (optional later) -->
+  <!-- Empty Block for Spacing -->
+  <div style="flex: 1;"></div>
 </div>
 
 <script>
@@ -292,25 +306,28 @@
   let currentTime = document.getElementById('currentTime');
 
   btn.addEventListener('click', function() {
+    const icon = btn.querySelector('i');
     if (isPlaying) {
-      btn.innerText = '▶️';
+      icon.classList.remove('fa-pause');
+      icon.classList.add('fa-play');
       isPlaying = false;
     } else {
-      btn.innerText = '⏸️';
+      icon.classList.remove('fa-play');
+      icon.classList.add('fa-pause');
       isPlaying = true;
     }
   });
 
   function previousSong() {
-    alert('Previous song clicked (functionality coming soon)');
+    alert('Previous song clicked!');
   }
   
   function nextSong() {
-    alert('Next song clicked (functionality coming soon)');
+    alert('Next song clicked!');
   }
 
   function repeatSong() {
-    alert('Repeat song clicked (functionality coming soon)');
+    alert('Repeat song clicked!');
   }
 
   // Fake Progress Simulation
@@ -328,7 +345,7 @@
     }
   }, 500);
 </script>
-<!-- Spotify Style Mini Player End -->
+<!-- Spotify Style Mini Player (Upgraded) -->
 </main>
 
 <footer>

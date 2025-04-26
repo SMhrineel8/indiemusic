@@ -12,17 +12,34 @@
       margin: 0;
       padding: 20px;
     }
-    .header {
-      font-size: 28px;
-      font-weight: bold;
-      margin-bottom: 20px;
+    .profile-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+    .profile-pic {
+      width: 120px;
+      height: 120px;
+      border-radius: 60px;
+      object-fit: cover;
+      margin-right: 20px;
+      border: 3px solid #1db954;
+    }
+    .profile-info h1 {
+      margin: 0;
+      font-size: 32px;
+    }
+    .profile-info p {
+      margin: 5px 0 0;
+      font-size: 16px;
+      color: #aaa;
     }
     .section {
-      margin-top: 30px;
+      margin-top: 40px;
     }
     .section h2 {
-      font-size: 22px;
-      margin-bottom: 15px;
+      font-size: 24px;
+      margin-bottom: 20px;
     }
     .item-list {
       display: flex;
@@ -38,6 +55,8 @@
     }
     .item-card img {
       width: 100%;
+      height: 180px;
+      object-fit: cover;
       border-radius: 8px;
     }
     .item-title {
@@ -55,36 +74,26 @@
 
 <body>
 
-  <div class="header">Hello, [Listener Name]</div>
-
-  <div class="section">
-    <h2>Saved Songs</h2>
-    <div class="item-list">
-      <div class="item-card">
-        <img src="https://via.placeholder.com/150" alt="Song Cover">
-        <div class="item-title">Song Title 1</div>
-        <div class="small-text">Artist Name</div>
-      </div>
-      <div class="item-card">
-        <img src="https://via.placeholder.com/150" alt="Song Cover">
-        <div class="item-title">Song Title 2</div>
-        <div class="small-text">Artist Name</div>
-      </div>
+  <div class="profile-header">
+    <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Profile Picture" class="profile-pic">
+    <div class="profile-info">
+      <h1>Shrineel Dadia</h1>
+      <p>shrineeldadia@email.com</p>
     </div>
   </div>
 
   <div class="section">
-    <h2>Recently Played</h2>
+    <h2>Your Playlists</h2>
     <div class="item-list">
       <div class="item-card">
-        <img src="https://via.placeholder.com/150" alt="Song Cover">
-        <div class="item-title">Recent Song 1</div>
-        <div class="small-text">Artist Name</div>
+        <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4" alt="Playlist Cover">
+        <div class="item-title">Chill Vibes</div>
+        <div class="small-text">24 songs</div>
       </div>
       <div class="item-card">
-        <img src="https://via.placeholder.com/150" alt="Song Cover">
-        <div class="item-title">Recent Song 2</div>
-        <div class="small-text">Artist Name</div>
+        <img src="https://images.unsplash.com/photo-1505685296765-3a2736de412f" alt="Playlist Cover">
+        <div class="item-title">Workout Beats</div>
+        <div class="small-text">18 songs</div>
       </div>
     </div>
   </div>
@@ -93,14 +102,30 @@
     <h2>Following Artists</h2>
     <div class="item-list">
       <div class="item-card">
-        <img src="https://via.placeholder.com/150" alt="Artist Photo">
-        <div class="item-title">Artist 1</div>
+        <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9" alt="Artist">
+        <div class="item-title">Armaan Malik</div>
         <div class="small-text">Pop</div>
       </div>
       <div class="item-card">
-        <img src="https://via.placeholder.com/150" alt="Artist Photo">
-        <div class="item-title">Artist 2</div>
-        <div class="small-text">Rock</div>
+        <img src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39" alt="Artist">
+        <div class="item-title">DIVINE</div>
+        <div class="small-text">Hip-Hop</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Saved Albums</h2>
+    <div class="item-list">
+      <div class="item-card">
+        <img src="https://images.unsplash.com/photo-1589417004173-93e8446f58cd" alt="Album Cover">
+        <div class="item-title">Lost in Melody</div>
+        <div class="small-text">Various Artists</div>
+      </div>
+      <div class="item-card">
+        <img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2" alt="Album Cover">
+        <div class="item-title">Beats Unleashed</div>
+        <div class="small-text">DJ Snake</div>
       </div>
     </div>
   </div>

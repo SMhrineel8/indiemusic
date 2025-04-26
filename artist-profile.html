@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Artist Dashboard | IndieMusic</title>
+  <link rel="stylesheet" href="styles.css"> <!-- Link your CSS if any -->
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #121212;
+      color: white;
+      margin: 0;
+      padding: 20px;
+    }
+    .header {
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px;
+    }
+    .metric-card {
+      background: #1e1e1e;
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+    .metric-number {
+      font-size: 32px;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+    .uploads {
+      margin-top: 40px;
+    }
+    .upload-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .upload-card {
+      background: #1e1e1e;
+      padding: 15px;
+      border-radius: 10px;
+      width: 200px;
+    }
+    .upload-card img {
+      width: 100%;
+      border-radius: 8px;
+    }
+    .upload-title {
+      margin-top: 10px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .upload-plays {
+      margin-top: 5px;
+      font-size: 14px;
+      color: #aaa;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="header">Welcome, [Artist Name]</div>
+
+  <div class="metrics">
+    <div class="metric-card">
+      <div class="metric-number">1532</div>
+      <div>Monthly Listeners</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-number">2.1K</div>
+      <div>Total Plays</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-number">524</div>
+      <div>Followers</div>
+    </div>
+  </div>
+
+  <div class="uploads">
+    <h2>Your Uploads</h2>
+    <div class="upload-list">
+      <div class="upload-card">
+        <img src="https://via.placeholder.com/150" alt="Song Cover">
+        <div class="upload-title">Song 1</div>
+        <div class="upload-plays">123 Plays</div>
+      </div>
+
+      <div class="upload-card">
+        <img src="https://via.placeholder.com/150" alt="Song Cover">
+        <div class="upload-title">Song 2</div>
+        <div class="upload-plays">89 Plays</div>
+      </div>
+
+      <div class="upload-card">
+        <img src="https://via.placeholder.com/150" alt="Song Cover">
+        <div class="upload-title">Song 3</div>
+        <div class="upload-plays">201 Plays</div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

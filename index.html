@@ -228,57 +228,107 @@
     </div>
   </section>
   
-  <!-- Mini Player Start -->
+<!-- Spotify Style Mini Player Start -->
 <div id="mini-player" style="
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
-  background-color: #1db954;
+  background-color: #181818;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 10px 20px;
-  box-shadow: 0 -2px 10px rgba(0,0,0,0.4);
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.5);
   z-index: 999;
-  font-family: Arial, sans-serif;
+  font-family: 'Arial', sans-serif;
+  color: white;
 ">
-  <div style="display: flex; align-items: center;">
+  <!-- Song Info -->
+  <div style="display: flex; align-items: center; flex: 1;">
     <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4" alt="Song Cover" style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px; margin-right: 15px;">
-    <div style="color: white;">
-      <div style="font-weight: bold;">Lost in Melody</div>
-      <div style="font-size: 12px;">Armaan Malik</div>
+    <div>
+      <div style="font-weight: bold; font-size: 14px;">Lost in Melody</div>
+      <div style="font-size: 12px; color: #b3b3b3;">Armaan Malik</div>
     </div>
   </div>
-  <div>
-    <button id="playPauseBtn" style="
-      background: white;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 30px;
-      font-weight: bold;
-      color: #1db954;
-      cursor: pointer;
-    ">Pause</button>
+
+  <!-- Player Controls -->
+  <div style="display: flex; align-items: center; flex: 2; flex-direction: column;">
+    <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 5px;">
+      <button onclick="previousSong()" style="background: none; border: none; color: white; margin: 0 10px; font-size: 20px;">⏮️</button>
+      <button id="playPauseBtn" style="
+        background: none;
+        border: 2px solid white;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        margin: 0 10px;
+      ">⏸️</button>
+      <button onclick="nextSong()" style="background: none; border: none; color: white; margin: 0 10px; font-size: 20px;">⏭️</button>
+      <button onclick="repeatSong()" style="background: none; border: none; color: white; margin: 0 10px; font-size: 20px;">🔁</button>
+    </div>
+
+    <!-- Progress Bar -->
+    <div style="width: 100%; display: flex; align-items: center;">
+      <span id="currentTime" style="font-size: 10px; color: #b3b3b3;">0:00</span>
+      <div style="flex: 1; height: 4px; background: #404040; margin: 0 10px; position: relative; border-radius: 2px;">
+        <div id="progress" style="height: 100%; width: 30%; background: #1db954; border-radius: 2px;"></div>
+      </div>
+      <span id="totalTime" style="font-size: 10px; color: #b3b3b3;">3:45</span>
+    </div>
   </div>
+
+  <!-- Volume Control (optional later) -->
 </div>
 
 <script>
   const btn = document.getElementById('playPauseBtn');
   let isPlaying = true;
+  let progress = document.getElementById('progress');
+  let currentTime = document.getElementById('currentTime');
 
   btn.addEventListener('click', function() {
     if (isPlaying) {
-      btn.innerText = 'Play';
+      btn.innerText = '▶️';
       isPlaying = false;
     } else {
-      btn.innerText = 'Pause';
+      btn.innerText = '⏸️';
       isPlaying = true;
     }
   });
-</script>
-<!-- Mini Player End -->
 
+  function previousSong() {
+    alert('Previous song clicked (functionality coming soon)');
+  }
+  
+  function nextSong() {
+    alert('Next song clicked (functionality coming soon)');
+  }
+
+  function repeatSong() {
+    alert('Repeat song clicked (functionality coming soon)');
+  }
+
+  // Fake Progress Simulation
+  setInterval(() => {
+    let width = parseFloat(progress.style.width);
+    if (width < 100 && isPlaying) {
+      width += 0.1;
+      progress.style.width = width + "%";
+      
+      let totalSeconds = Math.floor((width/100) * 225); // 225 sec = 3min 45sec
+      let minutes = Math.floor(totalSeconds / 60);
+      let seconds = totalSeconds % 60;
+      if (seconds < 10) seconds = "0" + seconds;
+      currentTime.innerText = `${minutes}:${seconds}`;
+    }
+  }, 500);
+</script>
+<!-- Spotify Style Mini Player End -->
 </main>
 
 <footer>

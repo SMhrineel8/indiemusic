@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>IndieMusic - Discover New Music</title>
+  <title>IndieMusic</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
     body {
@@ -12,7 +11,6 @@
       background-color: #f7f7f7;
       color: #333;
     }
-
     /* Header */
     header {
       background-color: #007BFF;
@@ -50,8 +48,7 @@
       padding: 5px 15px;
       margin-left: 8px;
     }
-
-    /* Main Sections */
+    /* Main sections */
     main {
       padding: 20px;
     }
@@ -59,46 +56,10 @@
       margin-bottom: 40px;
     }
     .section h2 {
-      font-size: 24px;
-      margin-bottom: 20px;
+      font-size: 22px;
+      margin-bottom: 15px;
     }
-    .grid {
-      display: flex;
-      gap: 15px;
-      overflow-x: auto;
-      padding-bottom: 10px;
-    }
-    .album-card {
-      min-width: 150px;
-      background-color: white;
-      border-radius: 10px;
-      padding: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      flex-shrink: 0;
-      text-align: center;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-    .album-card img {
-      width: 100%;
-      height: 150px;
-      object-fit: cover;
-      border-radius: 8px;
-      margin-bottom: 10px;
-    }
-    .album-card:hover {
-      transform: scale(1.05);
-      box-shadow: 0px 6px 15px rgba(0,0,0,0.2);
-    }
-    .album-title {
-      font-size: 16px;
-      margin-bottom: 5px;
-    }
-    .album-artist {
-      font-size: 14px;
-      color: #555;
-    }
-
-    /* Mini Player (Optional) */
+    /* Mini Player */
     #mini-player {
       position: fixed;
       bottom: 0;
@@ -124,7 +85,7 @@
   <div class="logo">INDIEMUSIC</div>
   <div class="tabs">
     <a href="#">Artists</a>
-    <a href="#">Concerts</a>
+    <a href="#">Recent Concerts</a>
     <a href="discover.html">Discover</a>
     <a href="upload.html">Upload</a>
     <a href="/listener-profile.html">Profile</a>
@@ -134,71 +95,146 @@
   </div>
 </header>
 
-<!-- Main -->
+<!-- Main Content -->
 <main>
-
-  <section class="section">
-    <h2>Discover</h2>
+  <div class="discover">
+    <h2 class="section-title">Discover</h2>
     <p>Find the latest indie artists and fresh tracks to vibe with!</p>
-  </section>
+  </div>
 
-  <section class="section">
-    <h2>Recently Played</h2>
-    <div class="grid">
-
-      <div class="album-card">
-        <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30" alt="Album">
-        <div class="album-title">Echoes</div>
-        <div class="album-artist">by Armaan Malik</div>
+  <!-- Recently Played -->
+  <div style="padding: 30px; background-color: #121212; color: white;">
+    <h2 style="margin-bottom: 20px;">Recently Played</h2>
+    <div style="display: flex; overflow-x: auto; gap: 20px;">
+      <div style="min-width: 150px; background: #181818; border-radius: 8px; padding: 10px; text-align: center;">
+        <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30" style="width: 100%; border-radius: 6px;">
+        <div>Echoes</div>
+        <div style="color: #b3b3b3;">by Armaan Malik</div>
       </div>
 
-      <div class="album-card">
-        <img src="https://images.unsplash.com/photo-1511376777868-611b54f68947" alt="Album">
-        <div class="album-title">Golden Hour</div>
-        <div class="album-artist">by Kygo</div>
+      <div style="min-width: 150px; background: #181818; border-radius: 8px; padding: 10px; text-align: center;">
+        <img src="https://images.unsplash.com/photo-1511376777868-611b54f68947" style="width: 100%; border-radius: 6px;">
+        <div>Golden Hour</div>
+        <div style="color: #b3b3b3;">by Kygo</div>
       </div>
-
-      <div class="album-card">
-        <img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3" alt="Album">
-        <div class="album-title">Midnight Vibes</div>
-        <div class="album-artist">by Dua Lipa</div>
-      </div>
-
     </div>
-  </section>
 
-  <section class="section">
-    <h2>Top Picks for You</h2>
-    <div class="grid">
+    <div style="margin: 40px 0;"></div>
 
-      <div class="album-card">
-        <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4" alt="Album">
-        <div class="album-title">Neon Dreams</div>
-        <div class="album-artist">by Alan Walker</div>
+    <h2 style="margin-bottom: 20px;">Top Picks for You</h2>
+    <div style="display: flex; overflow-x: auto; gap: 20px;">
+      <div style="min-width: 150px; background: #181818; border-radius: 8px; padding: 10px; text-align: center;">
+        <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4" style="width: 100%; border-radius: 6px;">
+        <div>Neon Dreams</div>
+        <div style="color: #b3b3b3;">by Alan Walker</div>
       </div>
-
-      <div class="album-card">
-        <img src="https://images.unsplash.com/photo-1513708927688-890f9b8a1c91" alt="Album">
-        <div class="album-title">Soul Waves</div>
-        <div class="album-artist">by Zayn</div>
-      </div>
-
-      <div class="album-card">
-        <img src="https://images.unsplash.com/photo-1464375117522-1311dd7e9184" alt="Album">
-        <div class="album-title">Sunset Boulevard</div>
-        <div class="album-artist">by Coldplay</div>
-      </div>
-
     </div>
-  </section>
-
+  </div>
 </main>
 
-<!-- Optional Mini Player -->
+<!-- Mini Player -->
 <div id="mini-player">
-  <div>Now Playing: Neon Dreams - Alan Walker</div>
-  <div><i class="fas fa-pause"></i></div>
+  <div style="display: flex; align-items: center;">
+    <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4" style="width: 55px; height: 55px; object-fit: cover; border-radius: 6px; margin-right: 15px;">
+    <div>
+      <div style="font-weight: bold; font-size: 14px;">Lost in Melody</div>
+      <div style="font-size: 12px; color: #b3b3b3;">Armaan Malik</div>
+    </div>
+  </div>
+
+  <div style="flex: 1; text-align: center;">
+    <button onclick="previousSong()" style="background: none; border: none; color: white; margin: 0 12px; font-size: 20px;">
+      <i class="fas fa-backward"></i>
+    </button>
+    <button id="playPauseBtn" style="
+      background: #1db954;
+      border: none;
+      border-radius: 50%;
+      width: 45px;
+      height: 45px;
+      color: white;
+      font-size: 18px;
+      margin: 0 15px;
+    ">
+      <i class="fas fa-pause"></i>
+    </button>
+    <button onclick="nextSong()" style="background: none; border: none; color: white; margin: 0 12px; font-size: 20px;">
+      <i class="fas fa-forward"></i>
+    </button>
+    <button onclick="repeatSong()" style="background: none; border: none; color: white; margin: 0 12px; font-size: 20px;">
+      <i class="fas fa-redo"></i>
+    </button>
+
+    <div style="width: 90%; margin-top: 10px; display: flex; align-items: center;">
+      <span id="currentTime" style="font-size: 10px; color: #b3b3b3;">0:00</span>
+      <div style="flex: 1; height: 4px; background: #404040; margin: 0 10px; position: relative; border-radius: 2px;">
+        <div id="progress" style="height: 100%; width: 0%; background: #1db954; border-radius: 2px;"></div>
+      </div>
+      <span id="totalTime" style="font-size: 10px; color: #b3b3b3;">3:45</span>
+    </div>
+  </div>
 </div>
+
+<!-- JavaScript -->
+<script>
+  const btn = document.getElementById('playPauseBtn');
+  const icon = btn.querySelector('i');
+  const progress = document.getElementById('progress');
+  const currentTimeEl = document.getElementById('currentTime');
+  const totalDuration = 225; // 3:45 in seconds
+  let currentTime = 0;
+  let isPlaying = true;
+  let interval;
+
+  function updateProgress() {
+    if (isPlaying) {
+      currentTime += 1;
+      if (currentTime >= totalDuration) {
+        currentTime = 0;
+      }
+      let percent = (currentTime / totalDuration) * 100;
+      progress.style.width = percent + "%";
+
+      let minutes = Math.floor(currentTime / 60);
+      let seconds = currentTime % 60;
+      currentTimeEl.textContent = `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+    }
+  }
+
+  function playPause() {
+    if (isPlaying) {
+      clearInterval(interval);
+      icon.classList.remove('fa-pause');
+      icon.classList.add('fa-play');
+      isPlaying = false;
+    } else {
+      interval = setInterval(updateProgress, 1000);
+      icon.classList.remove('fa-play');
+      icon.classList.add('fa-pause');
+      isPlaying = true;
+    }
+  }
+
+  function previousSong() {
+    currentTime = 0;
+    updateProgress();
+  }
+
+  function nextSong() {
+    currentTime = 0;
+    updateProgress();
+  }
+
+  function repeatSong() {
+    currentTime = 0;
+    updateProgress();
+  }
+
+  btn.addEventListener('click', playPause);
+
+  // Start the timer
+  interval = setInterval(updateProgress, 1000);
+</script>
 
 </body>
 </html>

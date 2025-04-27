@@ -186,13 +186,145 @@
     </div>
   </header>
 
-  <main>
-    <!-- Your main content here -->
-  </main>
+ <main>
+  <div class="discover">
+    <h2 class="section-title">Discover</h2>
+    <p>Find the latest indie artists and fresh tracks to vibe with!</p>
+  </div>
 
-  <footer>
-    &copy; 2025 IndieMusic. All rights reserved.
-  </footer>
+  <!-- Recently Played -->
+  <div style="padding: 30px; background-color: #121212; color: white;">
+    <h2 style="margin-bottom: 20px;">Recently Played</h2>
+    <div style="display: flex; overflow-x: auto; gap: 20px;">
+      <div style="min-width: 150px; background: #181818; border-radius: 8px; padding: 10px; text-align: center;">
+        <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30" style="width: 100%; border-radius: 6px;">
+        <div>Echoes</div>
+        <div style="color: #b3b3b3;">by Armaan Malik</div>
+      </div>
+
+      <div style="min-width: 150px; background: #181818; border-radius: 8px; padding: 10px; text-align: center;">
+        <img src="https://images.unsplash.com/photo-1511376777868-611b54f68947" style="width: 100%; border-radius: 6px;">
+        <div>Golden Hour</div>
+        <div style="color: #b3b3b3;">by Kygo</div>
+      </div>
+    </div>
+
+    <div style="margin: 40px 0;"></div>
+
+    <h2 style="margin-bottom: 20px;">Top Picks for You</h2>
+    <div style="display: flex; overflow-x: auto; gap: 20px;">
+      <div style="min-width: 150px; background: #181818; border-radius: 8px; padding: 10px; text-align: center;">
+        <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4" style="width: 100%; border-radius: 6px;">
+        <div>Neon Dreams</div>
+        <div style="color: #b3b3b3;">by Alan Walker</div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- Mini Player -->
+<div id="mini-player">
+  <div style="display: flex; align-items: center;">
+    <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4" style="width: 55px; height: 55px; object-fit: cover; border-radius: 6px; margin-right: 15px;">
+    <div>
+      <div style="font-weight: bold; font-size: 14px;">Lost in Melody</div>
+      <div style="font-size: 12px; color: #b3b3b3;">Armaan Malik</div>
+    </div>
+  </div>
+
+  <div style="flex: 1; text-align: center;">
+    <button onclick="previousSong()" style="background: none; border: none; color: white; margin: 0 12px; font-size: 20px;">
+      <i class="fas fa-backward"></i>
+    </button>
+    <button id="playPauseBtn" style="
+      background: #1db954;
+      border: none;
+      border-radius: 50%;
+      width: 45px;
+      height: 45px;
+      color: white;
+      font-size: 18px;
+      margin: 0 15px;
+    ">
+      <i class="fas fa-pause"></i>
+    </button>
+    <button onclick="nextSong()" style="background: none; border: none; color: white; margin: 0 12px; font-size: 20px;">
+      <i class="fas fa-forward"></i>
+    </button>
+    <button onclick="repeatSong()" style="background: none; border: none; color: white; margin: 0 12px; font-size: 20px;">
+      <i class="fas fa-redo"></i>
+    </button>
+
+    <div style="width: 90%; margin-top: 10px; display: flex; align-items: center;">
+      <span id="currentTime" style="font-size: 10px; color: #b3b3b3;">0:00</span>
+      <div style="flex: 1; height: 4px; background: #404040; margin: 0 10px; position: relative; border-radius: 2px;">
+        <div id="progress" style="height: 100%; width: 0%; background: #1db954; border-radius: 2px;"></div>
+      </div>
+      <span id="totalTime" style="font-size: 10px; color: #b3b3b3;">3:45</span>
+    </div>
+  </div>
+</div>
+
+<!-- JavaScript -->
+<script>
+  const btn = document.getElementById('playPauseBtn');
+  const icon = btn.querySelector('i');
+  const progress = document.getElementById('progress');
+  const currentTimeEl = document.getElementById('currentTime');
+  const totalDuration = 225; // 3:45 in seconds
+  let currentTime = 0;
+  let isPlaying = true;
+  let interval;
+
+  function updateProgress() {
+    if (isPlaying) {
+      currentTime += 1;
+      if (currentTime >= totalDuration) {
+        currentTime = 0;
+      }
+      let percent = (currentTime / totalDuration) * 100;
+      progress.style.width = percent + "%";
+
+      let minutes = Math.floor(currentTime / 60);
+      let seconds = currentTime % 60;
+      currentTimeEl.textContent = `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+    }
+  }
+
+  function playPause() {
+    if (isPlaying) {
+      clearInterval(interval);
+      icon.classList.remove('fa-pause');
+      icon.classList.add('fa-play');
+      isPlaying = false;
+    } else {
+      interval = setInterval(updateProgress, 1000);
+      icon.classList.remove('fa-play');
+      icon.classList.add('fa-pause');
+      isPlaying = true;
+    }
+  }
+
+  function previousSong() {
+    currentTime = 0;
+    updateProgress();
+  }
+
+  function nextSong() {
+    currentTime = 0;
+    updateProgress();
+  }
+
+  function repeatSong() {
+    currentTime = 0;
+    updateProgress();
+  }
+
+  btn.addEventListener('click', playPause);
+
+  // Start the timer
+  interval = setInterval(updateProgress, 1000);
+</script>
 
 </body>
 </html>

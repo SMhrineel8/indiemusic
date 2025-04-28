@@ -2,355 +2,257 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IndieMusic - Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IndieMusic – Home</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    /* Base Reset */
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-    body { background: #f9f9f9; color: #222; }
+    /* RESET & BASE */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family: 'Arial', sans-serif; background:#f9f9f9; color:#333; }
+    a { text-decoration:none; color:inherit; }
 
-    a { text-decoration: none; color: inherit; }
-
-    /* Join Waitlist CTA */
+    /* WAITLIST BANNER */
     .join-waitlist {
-      background: linear-gradient(90deg, #6a11cb, #2575fc);
-      color: white;
-      text-align: center;
-      padding: 10px 20px;
-      font-weight: bold;
-      font-size: 1rem;
+      display:flex; justify-content:center;
+      background:linear-gradient(90deg,#6a11cb,#2575fc);
+      color:#fff; padding:12px; font-weight:bold;
     }
+    .join-waitlist a { color:#fff; }
 
-    /* Header */
+    /* HEADER */
     header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 15px 20px;
-      background: white;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      display:flex; align-items:center; justify-content:space-between;
+      background:#fff; padding:15px 20px;
+      box-shadow:0 2px 5px rgba(0,0,0,0.1);
+      position:sticky; top:0; z-index:10;
     }
-
-    .logo {
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: #2575fc;
-    }
-
-    .tabs {
-      display: flex;
-      gap: 20px;
-      font-size: 0.9rem;
-    }
-
+    .logo { font-size:1.5rem; font-weight:bold; color:#2575fc; }
+    .tabs { display:flex; gap:20px; }
+    .tabs a { color:#333; font-weight:500; }
+    .tabs a:hover { color:#2575fc; }
     .search-box {
-      border: 1px solid #ccc;
-      padding: 5px 10px;
-      border-radius: 20px;
-      display: flex;
-      align-items: center;
-      background: #f1f1f1;
+      display:flex; align-items:center;
+      background:#f1f1f1; border:1px solid #ccc;
+      border-radius:20px; padding:5px 10px;
     }
-
     .search-box input {
-      border: none;
-      background: transparent;
-      outline: none;
-      margin-left: 5px;
+      border:none; background:transparent; outline:none; margin-left:5px;
     }
 
-    /* Sections */
-    .section {
-      padding: 20px;
+    /* MAIN SECTIONS */
+    main { padding:20px; }
+    .section { margin-bottom:40px; }
+    .section h2 {
+      font-size:1.5rem; margin-bottom:15px; font-weight:600;
     }
+    .grid {
+      display:flex; gap:15px; flex-wrap:wrap;
+    }
+    .grid img {
+      width:200px; height:200px; object-fit:cover;
+      border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.1);
+      transition:transform .3s;
+    }
+    .grid img:hover { transform:scale(1.05); }
 
-    .section-title {
-      font-size: 1.2rem;
-      margin-bottom: 15px;
-      font-weight: 600;
+    /* RECENTLY PLAYED / TOP PICKS */
+    .playlists {
+      padding:30px; background:#121212; color:#fff;
     }
+    .playlists h2 { margin-bottom:20px; }
+    .playlists .row {
+      display:flex; overflow-x:auto; gap:20px; padding-bottom:10px;
+    }
+    .playlists .card {
+      min-width:150px; background:#181818; border-radius:8px;
+      padding:10px; text-align:center; flex-shrink:0;
+    }
+    .playlists .card img {
+      width:100%; border-radius:6px; margin-bottom:10px;
+    }
+    .playlists .card .title { font-size:14px; }
+    .playlists .card .artist { font-size:12px; color:#b3b3b3; }
 
-    .scroll-row {
-      display: flex;
-      overflow-x: auto;
-      gap: 15px;
-      padding-bottom: 10px;
+    /* MINI PLAYER */
+    #mini-player {
+      position:fixed; bottom:0; left:0; width:100%;
+      background:#181818; color:#fff;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:10px 20px; box-shadow:0 -2px 10px rgba(0,0,0,0.5);
+      z-index:20;
     }
-
-    .scroll-row img {
-      width: 100px;
-      height: 100px;
-      object-fit: cover;
-      border-radius: 10px;
-      flex-shrink: 0;
+    #mini-player .info {
+      display:flex; align-items:center; gap:15px; flex:1;
     }
-
-    .grid-row {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-      gap: 15px;
+    #mini-player .info img {
+      width:55px; height:55px; object-fit:cover; border-radius:6px;
     }
-
-    .grid-row img {
-      width: 100%;
-      border-radius: 10px;
-      object-fit: cover;
+    #mini-player .controls {
+      flex:2; display:flex; flex-direction:column; align-items:center;
     }
-
-    .highlight-card {
-      background: white;
-      padding: 15px;
-      margin-bottom: 15px;
-      border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-      display: flex;
-      gap: 15px;
-      align-items: center;
+    #mini-player .controls .buttons {
+      display:flex; align-items:center; gap:20px; margin-bottom:5px;
     }
-
-    .highlight-card img {
-      width: 60px;
-      height: 60px;
-      border-radius: 8px;
-      object-fit: cover;
+    #mini-player .controls button {
+      background:none; border:none; color:#fff; font-size:20px;
+      cursor:pointer;
     }
-
-    .highlight-text {
-      display: flex;
-      flex-direction: column;
+    #mini-player .controls #playPauseBtn {
+      background:#1db954; border:none; border-radius:50%;
+      width:45px; height:45px; display:flex; align-items:center;
+      justify-content:center; color:#fff; font-size:18px;
     }
-
-    .highlight-text h4 {
-      font-size: 1rem;
+    #mini-player .controls .progress {
+      display:flex; align-items:center; width:90%;
+      gap:10px; font-size:10px; color:#b3b3b3;
     }
-
-    .highlight-text p {
-      font-size: 0.8rem;
-      color: #666;
+    #mini-player .controls .progress .bar {
+      flex:1; height:4px; background:#404040; border-radius:2px;
+      position:relative;
     }
-
-    /* Footer */
-    footer {
-      text-align: center;
-      font-size: 0.8rem;
-      color: #aaa;
-      padding: 20px 10px;
+    #mini-player .controls .progress .fill {
+      height:100%; width:0%; background:#1db954; border-radius:2px;
     }
-
-    /* Scrollbar for rows */
-    ::-webkit-scrollbar {
-      height: 6px;
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: #ccc;
-      border-radius: 10px;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: transparent;
-    }
+    #mini-player .spacer { flex:1; }
   </style>
 </head>
 <body>
 
-  <!-- Waitlist CTA -->
+  <!-- WAITLIST -->
   <div class="join-waitlist">
-     <a href="joinwaitlist.html">Join the IndieMusic Waitlist for Early Access!</a>
+    <a href="joinwaitlist.html">Join the IndieMusic Waitlist for Early Access!</a>
   </div>
 
-  <!-- Header -->
+  <!-- HEADER -->
   <header>
     <div class="logo">INDIEMUSIC</div>
-    <div class="tabs">
+    <nav class="tabs">
       <a href="#">Artists</a>
       <a href="#">Recent Concerts</a>
       <a href="discover.html">Discover</a>
       <a href="upload.html">Upload</a>
-       <a href="/listener-profile.html">Profile</a>
-    </div>
+      <a href="listener-profile.html">Profile</a>
+    </nav>
     <div class="search-box">
-      🔍<input type="text" placeholder="Search">
+      <i class="fas fa-search"></i><input type="text" placeholder="Search">
     </div>
   </header>
 
-<main>
+  <!-- MAIN -->
+  <main>
+    <section class="section">
+      <h2>Trending Artists</h2>
+      <div class="grid">
+        <img src="https://picsum.photos/200?random=1" alt="Artist 1">
+        <img src="https://picsum.photos/200?random=2" alt="Artist 2">
+        <img src="https://picsum.photos/200?random=3" alt="Artist 3">
+      </div>
+    </section>
 
-  <section class="section">
-    <h2>Trending Artists</h2>
-    <div class="grid">
-      <img class="placeholder-img" src="https://picsum.photos/200?random=1" alt="Trending Artist 1">
-      <img class="placeholder-img" src="https://picsum.photos/200?random=2" alt="Trending Artist 2">
-      <img class="placeholder-img" src="https://picsum.photos/200?random=3" alt="Trending Artist 3">
-    </div>
-  </section>
+    <section class="section">
+      <h2>Hit Songs</h2>
+      <div class="grid">
+        <img src="https://picsum.photos/200?random=4" alt="Song 1">
+        <img src="https://picsum.photos/200?random=5" alt="Song 2">
+      </div>
+    </section>
 
-  <section class="section">
-    <h2>Hit Songs</h2>
-    <div class="grid">
-      <img class="placeholder-img" src="https://picsum.photos/200?random=4" alt="Hit Song 1">
-      <img class="placeholder-img" src="https://picsum.photos/200?random=5" alt="Hit Song 2">
-    </div>
-  </section>
+    <div class="playlists">
+      <h2>Recently Played</h2>
+      <div class="row">
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30" alt="Echoes">
+          <div class="title">Echoes</div>
+          <div class="artist">by Armaan Malik</div>
+        </div>
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1511376777868-611b54f68947" alt="Golden Hour">
+          <div class="title">Golden Hour</div>
+          <div class="artist">by Kygo</div>
+        </div>
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3" alt="Midnight Vibes">
+          <div class="title">Midnight Vibes</div>
+          <div class="artist">by Dua Lipa</div>
+        </div>
+      </div>
 
-  <section class="section">
-    <h2>Concerts</h2>
-    <div class="grid">
-      <img class="placeholder-img" src="https://picsum.photos/200?random=6" alt="Concert 1">
-      <img class="placeholder-img" src="https://picsum.photos/200?random=7" alt="Concert 2">
-    </div>
-  </section>
-
-  <section class="section">
-    <h2>Newly Arrived Artists</h2>
-    <div class="grid">
-      <img class="placeholder-img" src="https://picsum.photos/200?random=8" alt="New Artist 1">
-      <img class="placeholder-img" src="https://picsum.photos/200?random=9" alt="New Artist 2">
-      <img class="placeholder-img" src="https://picsum.photos/200?random=10" alt="New Artist 3">
-    </div>
-  </section>
-
-  <section class="section">
-    <h2>Concert Highlights</h2>
-    <div class="highlight-card">
-      <img src="https://picsum.photos/100?random=11" alt="Highlight 1">
-      <div>
-        <h3>Concert Name</h3>
-        <p>Artist Name</p>
+      <h2 style="margin-top:40px;">Top Picks for You</h2>
+      <div class="row">
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4" alt="Neon Dreams">
+          <div class="title">Neon Dreams</div>
+          <div class="artist">by Alan Walker</div>
+        </div>
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1513708927688-890f9b8a1c91" alt="Soul Waves">
+          <div class="title">Soul Waves</div>
+          <div class="artist">by Zayn</div>
+        </div>
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1464375117522-1311dd7e9184" alt="Sunset Boulevard">
+          <div class="title">Sunset Boulevard</div>
+          <div class="artist">by Coldplay</div>
+        </div>
       </div>
     </div>
-    <div class="highlight-card">
-      <img src="https://picsum.photos/100?random=12" alt="Highlight 2">
+  </main>
+
+  <!-- MINI PLAYER -->
+  <div id="mini-player">
+    <div class="info">
+      <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4" alt="Cover">
       <div>
-        <h3>Concert Name</h3>
-        <p>Artist Name</p>
+        <div style="font-weight:bold; font-size:14px;">Lost in Melody</div>
+        <div style="font-size:12px; color:#b3b3b3;">Armaan Malik</div>
       </div>
     </div>
-  </section>
-  
-<!-- Spotify Style Mini Player (Upgraded) -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-
-<div id="mini-player" style="
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background-color: #181818;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 20px;
-  box-shadow: 0 -2px 10px rgba(0,0,0,0.5);
-  z-index: 999;
-  font-family: 'Arial', sans-serif;
-  color: white;
-">
-  <!-- Song Info -->
-  <div style="display: flex; align-items: center; flex: 1;">
-    <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4" alt="Song Cover" style="width: 55px; height: 55px; object-fit: cover; border-radius: 6px; margin-right: 15px;">
-    <div>
-      <div style="font-weight: bold; font-size: 14px;">Lost in Melody</div>
-      <div style="font-size: 12px; color: #b3b3b3;">Armaan Malik</div>
+    <div class="controls">
+      <div class="buttons">
+        <button onclick="previousSong()"><i class="fas fa-backward"></i></button>
+        <button id="playPauseBtn"><i class="fas fa-pause"></i></button>
+        <button onclick="nextSong()"><i class="fas fa-forward"></i></button>
+        <button onclick="repeatSong()"><i class="fas fa-redo"></i></button>
+      </div>
+      <div class="progress">
+        <span id="currentTime">0:00</span>
+        <div class="bar"><div class="fill" id="progress"></div></div>
+        <span id="totalTime">3:45</span>
+      </div>
     </div>
+    <div class="spacer"></div>
   </div>
 
-  <!-- Player Controls -->
-  <div style="flex: 2; display: flex; flex-direction: column; align-items: center;">
-    <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 5px;">
-      <button onclick="previousSong()" style="background: none; border: none; color: white; margin: 0 12px; font-size: 20px; cursor: pointer;">
-        <i class="fas fa-backward"></i>
-      </button>
-      <button id="playPauseBtn" style="
-        background: #1db954;
-        border: none;
-        border-radius: 50%;
-        width: 45px;
-        height: 45px;
-        color: white;
-        font-size: 18px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 0 15px;
-      ">
-        <i class="fas fa-pause"></i>
-      </button>
-      <button onclick="nextSong()" style="background: none; border: none; color: white; margin: 0 12px; font-size: 20px; cursor: pointer;">
-        <i class="fas fa-forward"></i>
-      </button>
-      <button onclick="repeatSong()" style="background: none; border: none; color: white; margin: 0 12px; font-size: 20px; cursor: pointer;">
-        <i class="fas fa-redo"></i>
-      </button>
-    </div>
+  <!-- PLAYER SCRIPT -->
+  <script>
+    const btn = document.getElementById('playPauseBtn'),
+          icon = btn.querySelector('i'),
+          fill = document.getElementById('progress'),
+          currentTimeEl = document.getElementById('currentTime'),
+          total = 225;
+    let ct = 0, playing = true, iv = setInterval(tick,1000);
 
-    <!-- Progress Bar -->
-    <div style="width: 90%; display: flex; align-items: center;">
-      <span id="currentTime" style="font-size: 10px; color: #b3b3b3;">0:00</span>
-      <div style="flex: 1; height: 4px; background: #404040; margin: 0 10px; position: relative; border-radius: 2px;">
-        <div id="progress" style="height: 100%; width: 30%; background: #1db954; border-radius: 2px;"></div>
-      </div>
-      <span id="totalTime" style="font-size: 10px; color: #b3b3b3;">3:45</span>
-    </div>
-  </div>
-
-  <!-- Empty Block for Spacing -->
-  <div style="flex: 1;"></div>
-</div>
-
-<script>
-  const btn = document.getElementById('playPauseBtn');
-  let isPlaying = true;
-  let progress = document.getElementById('progress');
-  let currentTime = document.getElementById('currentTime');
-
-  btn.addEventListener('click', function() {
-    const icon = btn.querySelector('i');
-    if (isPlaying) {
-      icon.classList.remove('fa-pause');
-      icon.classList.add('fa-play');
-      isPlaying = false;
-    } else {
-      icon.classList.remove('fa-play');
-      icon.classList.add('fa-pause');
-      isPlaying = true;
+    function tick(){
+      if(!playing) return;
+      ct = (ct>=total?0:ct+1);
+      let pct = (ct/total)*100;
+      fill.style.width = pct + '%';
+      let m = Math.floor(ct/60), s = ct%60; if(s<10)s='0'+s;
+      currentTimeEl.textContent = `${m}:${s}`;
     }
-  });
-
-  function previousSong() {
-    alert('Previous song clicked!');
-  }
-  
-  function nextSong() {
-    alert('Next song clicked!');
-  }
-
-  function repeatSong() {
-    alert('Repeat song clicked!');
-  }
-
-  // Fake Progress Simulation
-  setInterval(() => {
-    let width = parseFloat(progress.style.width);
-    if (width < 100 && isPlaying) {
-      width += 0.1;
-      progress.style.width = width + "%";
-      
-      let totalSeconds = Math.floor((width/100) * 225); // 225 sec = 3min 45sec
-      let minutes = Math.floor(totalSeconds / 60);
-      let seconds = totalSeconds % 60;
-      if (seconds < 10) seconds = "0" + seconds;
-      currentTime.innerText = ${minutes}:${seconds};
+    function playPause(){
+      playing = !playing;
+      clearInterval(iv);
+      if(playing) iv = setInterval(tick,1000);
+      icon.classList.toggle('fa-play');
+      icon.classList.toggle('fa-pause');
     }
-  }, 500);
-</script>
-<!-- Spotify Style Mini Player (Upgraded) -->
-</main>
+    function previousSong(){ ct=0; tick(); }
+    function nextSong(){ ct=0; tick(); }
+    function repeatSong(){ ct=0; tick(); }
 
-<footer>
-  &copy; 2025 IndieMusic. All Rights Reserved.
-</footer>
+    btn.addEventListener('click', playPause);
+  </script>
 
 </body>
 </html>

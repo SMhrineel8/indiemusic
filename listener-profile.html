@@ -1,134 +1,263 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Listener Profile | IndieMusic</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>IndieMusic – Your Library</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #121212;
-      color: white;
-      margin: 0;
-      padding: 20px;
+    /* RESET */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'Segoe UI',sans-serif; background:#f4f4f4; color:#333; }
+
+    /* WAITLIST CTA */
+    .join-waitlist {
+      display:block; text-align:center;
+      background:linear-gradient(90deg,#6a11cb,#2575fc);
+      color:#fff; padding:12px; font-weight:600;
+      text-decoration:none;
     }
+    .join-waitlist:hover { opacity:.9; }
+
+    /* HEADER */
+    header {
+      display:flex; align-items:center; justify-content:space-between;
+      padding:12px 20px; background:#fff;
+      box-shadow:0 2px 5px rgba(0,0,0,0.05);
+      position:sticky; top:0; z-index:100;
+    }
+    .logo { font-size:1.5rem; font-weight:bold; color:#2575fc; }
+    nav a {
+      margin:0 10px; color:#333; text-decoration:none; font-weight:500;
+    }
+    nav a:hover { color:#2575fc; }
+    .search-box {
+      position:relative;
+    }
+    .search-box input {
+      padding:6px 30px 6px 10px;
+      border-radius:20px; border:1px solid #ccc;
+      outline:none;
+    }
+    .search-box .fa-search {
+      position:absolute; right:10px; top:50%;
+      transform:translateY(-50%); color:#666;
+    }
+
+    /* MAIN */
+    main { max-width:1100px; margin:20px auto; padding:0 20px; }
+
+    /* PROFILE HEADER */
     .profile-header {
-      display: flex;
-      align-items: center;
-      margin-bottom: 40px;
+      display:flex; align-items:center; gap:15px;
+      margin-bottom:30px;
     }
-    .profile-pic {
-      width: 120px;
-      height: 120px;
-      border-radius: 60px;
-      object-fit: cover;
-      margin-right: 20px;
-      border: 3px solid #1db954;
+    .profile-header .avatar {
+      width:80px; height:80px; border-radius:50%;
+      object-fit:cover; box-shadow:0 2px 8px rgba(0,0,0,0.1);
     }
-    .profile-info h1 {
-      margin: 0;
-      font-size: 32px;
+    .profile-header h1 {
+      font-size:2rem; font-weight:600;
     }
-    .profile-info p {
-      margin: 5px 0 0;
-      font-size: 16px;
-      color: #aaa;
+
+    /* SECTIONS */
+    .section { margin-bottom:40px; }
+    .section-title {
+      font-size:1.4rem; margin-bottom:15px; font-weight:600;
     }
-    .section {
-      margin-top: 40px;
+    .scroll-row {
+      display:flex; overflow-x:auto; gap:15px; padding-bottom:10px;
     }
-    .section h2 {
-      font-size: 24px;
-      margin-bottom: 20px;
+    .scroll-row a {
+      text-align:center; color:inherit; text-decoration:none;
+      flex-shrink:0;
     }
-    .item-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
+    .scroll-row img {
+      width:120px; height:120px; object-fit:cover;
+      border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);
+      transition:transform .3s;
     }
-    .item-card {
-      background: #1e1e1e;
-      padding: 15px;
-      border-radius: 10px;
-      width: 180px;
-      text-align: center;
+    .scroll-row img:hover { transform:scale(1.05); }
+    .scroll-row .label {
+      margin-top:8px; font-size:0.9rem;
     }
-    .item-card img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      border-radius: 8px;
+
+    /* MINI PLAYER */
+    #mini-player {
+      position:fixed; bottom:0; left:0; width:100%;
+      background-color:#181818; display:flex;
+      align-items:center; justify-content:space-between;
+      padding:10px 20px; box-shadow:0 -2px 10px rgba(0,0,0,0.5);
+      z-index:999; color:white; font-family:'Arial',sans-serif;
     }
-    .item-title {
-      margin-top: 10px;
-      font-size: 16px;
-      font-weight: bold;
+    #mini-player .info { display:flex; align-items:center; gap:12px; flex:1; }
+    #mini-player .info img {
+      width:50px; height:50px; object-fit:cover; border-radius:4px;
     }
-    .small-text {
-      margin-top: 5px;
-      font-size: 13px;
-      color: #aaa;
+    #mini-player .controls { flex:2; text-align:center; }
+    #mini-player .controls button {
+      background:none; border:none; color:white; margin:0 10px;
+      font-size:18px; cursor:pointer;
+    }
+    #mini-player .controls #playPauseBtn {
+      background:#1db954; border:none; border-radius:50%;
+      width:40px; height:40px; color:white; font-size:16px;
+      display:inline-flex; align-items:center; justify-content:center;
+    }
+    #mini-player .progress { display:flex; align-items:center; gap:8px; margin-top:5px; }
+    #mini-player .progress-bar {
+      flex:1; height:4px; background:#404040; border-radius:2px; overflow:hidden;
+    }
+    #mini-player .progress-fill {
+      height:100%; width:0; background:#1db954;
+    }
+    #mini-player span { font-size:10px; color:#b3b3b3; }
+
+    /* RESPONSIVE */
+    @media(max-width:600px){
+      .profile-header { flex-direction:column; align-items:flex-start; gap:10px; }
+      .search-box { width:100%; margin-top:10px; }
     }
   </style>
 </head>
-
 <body>
 
-  <div class="profile-header">
-    <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Profile Picture" class="profile-pic">
-    <div class="profile-info">
-      <h1>Shrineel Dadia</h1>
-      <p>shrineeldadia@email.com</p>
+  <!-- Waitlist -->
+  <a href="joinwaitlist.html" class="join-waitlist">
+    🎉 Join the IndieMusic Waitlist for Early Access!
+  </a>
+
+  <!-- Header -->
+  <header>
+    <div class="logo">INDIEMUSIC</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="discover.html">Discover</a>
+      <a href="upload.html">Upload</a>
+      <a href="listener-profile.html">Profile</a>
+    </nav>
+    <div class="search-box">
+      <input type="text" placeholder="Search…">
+      <i class="fas fa-search"></i>
     </div>
+  </header>
+
+  <main>
+    <!-- Profile Header -->
+    <div class="profile-header">
+      <img src="https://picsum.photos/seed/user/80" alt="Avatar" class="avatar">
+      <h1>Your Library</h1>
+    </div>
+
+    <!-- Playlists -->
+    <section class="section">
+      <h2 class="section-title">Playlists</h2>
+      <div class="scroll-row">
+        <a href="#">
+          <img src="https://picsum.photos/seed/pl1/120" alt="Playlist 1">
+          <div class="label">Chill Vibes</div>
+        </a>
+        <a href="#">
+          <img src="https://picsum.photos/seed/pl2/120" alt="Playlist 2">
+          <div class="label">Morning Boost</div>
+        </a>
+        <a href="#">
+          <img src="https://picsum.photos/seed/pl3/120" alt="Playlist 3">
+          <div class="label">Late Night</div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Following Artists -->
+    <section class="section">
+      <h2 class="section-title">Following Artists</h2>
+      <div class="scroll-row">
+        <a href="#">
+          <img src="https://picsum.photos/seed/ar1/120" alt="Artist 1">
+          <div class="label">Luna Ray</div>
+        </a>
+        <a href="#">
+          <img src="https://picsum.photos/seed/ar2/120" alt="Artist 2">
+          <div class="label">Metro Waves</div>
+        </a>
+        <a href="#">
+          <img src="https://picsum.photos/seed/ar3/120" alt="Artist 3">
+          <div class="label">Echo Chamber</div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Recently Played -->
+    <section class="section">
+      <h2 class="section-title">Recently Played</h2>
+      <div class="scroll-row">
+        <a href="#">
+          <img src="https://picsum.photos/seed/rp1/120" alt="Track 1">
+          <div class="label">Lost in Melody</div>
+        </a>
+        <a href="#">
+          <img src="https://picsum.photos/seed/rp2/120" alt="Track 2">
+          <div class="label">City Lights</div>
+        </a>
+        <a href="#">
+          <img src="https://picsum.photos/seed/rp3/120" alt="Track 3">
+          <div class="label">Ocean Waves</div>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Mini Player -->
+  <div id="mini-player">
+    <div class="info">
+      <img src="https://picsum.photos/seed/cover/50" alt="Cover">
+      <div>
+        <div style="font-weight:bold;font-size:14px;">Lost in Melody</div>
+        <div style="font-size:12px;color:#b3b3b3;">Armaan Malik</div>
+      </div>
+    </div>
+    <div class="controls">
+      <button onclick="previousSong()"><i class="fas fa-backward"></i></button>
+      <button id="playPauseBtn"><i class="fas fa-pause"></i></button>
+      <button onclick="nextSong()"><i class="fas fa-forward"></i></button>
+      <button onclick="repeatSong()"><i class="fas fa-redo"></i></button>
+      <div class="progress">
+        <span id="currentTime">0:00</span>
+        <div class="progress-bar"><div id="progress" class="progress-fill"></div></div>
+        <span id="totalTime">3:45</span>
+      </div>
+    </div>
+    <div style="flex:1"></div>
   </div>
 
-  <div class="section">
-    <h2>Your Playlists</h2>
-    <div class="item-list">
-      <div class="item-card">
-        <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4" alt="Playlist Cover">
-        <div class="item-title">Chill Vibes</div>
-        <div class="small-text">24 songs</div>
-      </div>
-      <div class="item-card">
-        <img src="https://images.unsplash.com/photo-1505685296765-3a2736de412f" alt="Playlist Cover">
-        <div class="item-title">Workout Beats</div>
-        <div class="small-text">18 songs</div>
-      </div>
-    </div>
-  </div>
+  <script>
+    const btn = document.getElementById('playPauseBtn');
+    const icon = btn.querySelector('i');
+    const progress = document.getElementById('progress');
+    const currentTimeEl = document.getElementById('currentTime');
+    let currentTime = 0, total = 225, playing = true, iv;
 
-  <div class="section">
-    <h2>Following Artists</h2>
-    <div class="item-list">
-      <div class="item-card">
-        <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9" alt="Artist">
-        <div class="item-title">Armaan Malik</div>
-        <div class="small-text">Pop</div>
-      </div>
-      <div class="item-card">
-        <img src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39" alt="Artist">
-        <div class="item-title">DIVINE</div>
-        <div class="small-text">Hip-Hop</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="section">
-    <h2>Saved Albums</h2>
-    <div class="item-list">
-      <div class="item-card">
-        <img src="https://images.unsplash.com/photo-1589417004173-93e8446f58cd" alt="Album Cover">
-        <div class="item-title">Lost in Melody</div>
-        <div class="small-text">Various Artists</div>
-      </div>
-      <div class="item-card">
-        <img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2" alt="Album Cover">
-        <div class="item-title">Beats Unleashed</div>
-        <div class="small-text">DJ Snake</div>
-      </div>
-    </div>
-  </div>
+    function update() {
+      if(playing) {
+        currentTime = (currentTime+1) % (total+1);
+        let pct = (currentTime/total)*100;
+        progress.style.width = pct + '%';
+        let m = Math.floor(currentTime/60), s = currentTime%60;
+        currentTimeEl.textContent = m+':'+(s<10?'0'+s:s);
+      }
+    }
+    btn.addEventListener('click', _=>{
+      playing = !playing;
+      clearInterval(iv);
+      icon.classList.toggle('fa-play');
+      icon.classList.toggle('fa-pause');
+      iv = setInterval(update,1000);
+    });
+    function previousSong(){ currentTime=0; update(); }
+    function nextSong(){ currentTime=0; update(); }
+    function repeatSong(){ currentTime=0; update(); }
+    iv = setInterval(update,1000);
+  </script>
 
 </body>
 </html>

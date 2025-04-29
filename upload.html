@@ -83,72 +83,78 @@
   <header>
     <h2>Upload Your Music</h2>
   </header>
+ <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  const supabase = supabase.createClient(
+    'https://your-project-id.supabase.co',
+    'your-anon-key'
+  );
+<script>
+  const form = document.getElementById("uploadForm");
 
-  <main>
-    <h1>Share Your Sound</h1>
-    <form id="uploadForm">
-      <label for="title">Song Title</label>
-      <input type="text" id="title" required>
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
 
-      <label for="genre">Genre</label>
-      <select id="genre" required>
-        <option value="">-- Select Genre --</option>
-        <option>Indie Rock</option>
-        <option>Alternative</option>
-        <option>Electronic</option>
-        <option>Hip Hop</option>
-        <option>Pop</option>
-      </select>
+    const title = document.getElementById("title").value;
+    const genre = document.getElementById("genre").value;
+    const description = document.getElementById("description").value;
+    const tags = document.getElementById("tags").value;
 
-      <label for="audio">Audio File</label>
-      <input type="file" id="audio" accept="audio/*" required>
+    const audioFile = document.getElementById("audio").files[0];
+    const coverFile = document.getElementById("cover").files[0];
 
-      <label for="cover">Cover Image</label>
-      <input type="file" id="cover" accept="image/*" required>
+    if (!audioFile || !coverFile) {
+      alert("Both audio and cover files are required.");
+      return;
+    }
 
-      <label for="description">Description</label>
-      <textarea id="description" rows="4" required></textarea>
+    // Upload audio
+    const { data: audioData, error: audioError } = await supabase
+      .storage
+      .from('tracks')
+      .upload(`tracks/${audioFile.name}`, audioFile);
 
-      <label for="tags">Tags (comma-separated)</label>
-      <input type="text" id="tags" placeholder="e.g. chill, lo-fi, upbeat">
+    if (audioError) {
+      alert("Audio upload failed: " + audioError.message);
+      return;
+    }
 
-      <button type="submit">Upload</button>
-      <div class="success" id="successMessage" style="display: none;"></div>
-    </form>
-  </main>
+    // Upload cover
+    const { data: coverData, error: coverError } = await supabase
+      .storage
+      .from('covers')
+      .upload(`covers/${coverFile.name}`, coverFile);
 
-  <script>
-    const form = document.getElementById("uploadForm");
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
+    if (coverError) {
+      alert("Cover upload failed: " + coverError.message);
+      return;
+    }
 
-      const title = document.getElementById("title").value;
-      const genre = document.getElementById("genre").value;
-      const description = document.getElementById("description").value;
-      const tags = document.getElementById("tags").value;
-      const audio = document.getElementById("audio").files[0]?.name;
-      const cover = document.getElementById("cover").files[0]?.name;
-
-      const songData = {
+    // Insert into songs table
+    const { error: insertError } = await supabase
+      .from('songs')
+      .insert([{
         title,
         genre,
         description,
         tags,
-        audio,
-        cover
-      };
+        audio_url: audioData.path,
+        cover_url: coverData.path,
+        created_at: new Date().toISOString()
+      }]);
 
-      let allSongs = JSON.parse(localStorage.getItem("songs")) || [];
-      allSongs.push(songData);
-      localStorage.setItem("songs", JSON.stringify(allSongs));
+    if (insertError) {
+      alert("Database insert failed: " + insertError.message);
+      return;
+    }
 
-      const success = document.getElementById("successMessage");
-      success.style.display = "block";
-      success.textContent = `🎉 "${title}" uploaded successfully!`;
+    // Show success
+    const success = document.getElementById("successMessage");
+    success.style.display = "block";
+    success.textContent = `🎉 "${title}" uploaded successfully!`;
 
-      form.reset();
-    });
-  </script>
-
+    form.reset();
+  });
+</script>
 </body>
 </html>

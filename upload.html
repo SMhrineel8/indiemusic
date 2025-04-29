@@ -3,67 +3,96 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Upload Your Music</title>
-  <script src="https://unpkg.com/@supabase/supabase-js"></script>
+  <title>Upload Your Music | IndieMusic</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
+    /* Page background & text */
     body {
       margin: 0;
+      background-color: #121212;
+      color: #fff;
       font-family: 'Segoe UI', sans-serif;
-      background-color: #f9f9f9;
       display: flex;
       flex-direction: column;
       align-items: center;
+      min-height: 100vh;
     }
 
+    /* Gradient header */
     header {
       width: 100%;
       padding: 20px;
       text-align: center;
       font-size: 24px;
       font-weight: bold;
-      background: linear-gradient(to right, #6a00ff, #00cfff);
+      background: linear-gradient(90deg, #6a00ff, #00cfff);
       color: white;
     }
 
+    /* Centered form container */
     .container {
-      margin-top: 60px;
-      background: white;
-      padding: 30px;
-      border-radius: 16px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      max-width: 400px;
       width: 90%;
-      text-align: center;
-    }
-
-    input[type="file"] {
-      width: 100%;
-      padding: 12px;
-      margin: 20px 0;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-    }
-
-    button {
-      background: linear-gradient(to right, #6a00ff, #00cfff);
-      border: none;
-      padding: 12px 24px;
-      font-size: 16px;
+      max-width: 500px;
+      background: #1e1e1e;
+      margin: 40px 0;
+      padding: 30px;
       border-radius: 12px;
-      color: white;
-      cursor: pointer;
-      transition: 0.3s ease;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
     }
 
-    button:hover {
-      opacity: 0.85;
+    .container h2 {
+      margin-bottom: 20px;
+      font-size: 20px;
     }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: 600;
+      color: #ddd;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      margin-top: 8px;
+      padding: 10px;
+      border: 1px solid #333;
+      border-radius: 8px;
+      background: #2a2a2a;
+      color: #fff;
+      font-size: 14px;
+    }
+
+    textarea { resize: vertical; }
+
+    input[type="checkbox"] {
+      width: auto;
+      margin-right: 8px;
+    }
+
+    .btn {
+      display: block;
+      width: 100%;
+      margin-top: 25px;
+      padding: 12px;
+      background: linear-gradient(90deg, #6a00ff, #00cfff);
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: opacity 0.3s;
+    }
+    .btn:hover { opacity: 0.85; }
 
     .status {
       margin-top: 20px;
       font-size: 14px;
-      color: #333;
+      text-align: center;
     }
+
+    /* Footer push */
+    .spacer { flex: 1; }
   </style>
 </head>
 <body>
@@ -71,53 +100,121 @@
   <header>Upload Your Music</header>
 
   <div class="container">
+    <h2>Fill in the details below</h2>
     <form id="uploadForm">
-      <input type="file" id="fileInput" accept="audio/*" required />
-      <button type="submit">Upload</button>
+      <label for="artistId">Artist ID</label>
+      <input type="text" id="artistId" placeholder="Your Supabase user UUID" required>
+
+      <label for="title">Song Title</label>
+      <input type="text" id="title" placeholder="Enter song title" required>
+
+      <label for="genre">Genre</label>
+      <select id="genre" required>
+        <option value="">— Select genre —</option>
+        <option>Indie Rock</option>
+        <option>Electronic</option>
+        <option>Hip Hop</option>
+        <option>Pop</option>
+        <option>Jazz</option>
+      </select>
+
+      <label for="description">Description</label>
+      <textarea id="description" rows="3" placeholder="Brief description"></textarea>
+
+      <label for="tags">Tags (comma-separated)</label>
+      <input type="text" id="tags" placeholder="e.g. chill, lo-fi">
+
+      <label>
+        <input type="checkbox" id="exclusive">
+        Exclusive release
+      </label>
+
+      <label for="audioFile">Audio File (mp3, wav…)</label>
+      <input type="file" id="audioFile" accept="audio/*" required>
+
+      <label for="coverFile">Cover Image (jpg, png)</label>
+      <input type="file" id="coverFile" accept="image/*" required>
+
+      <button class="btn" type="submit">Upload to Supabase</button>
     </form>
     <div class="status" id="statusMessage"></div>
   </div>
 
+  <div class="spacer"></div>
+
   <script>
+    // Initialize Supabase
     const SUPABASE_URL = 'https://abgnswmbzulhdkduyezr.supabase.co';
     const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFiZ25zd21ienVsaGRrZHV5ZXpyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQ5NzY2MDIsImV4cCI6MjA2MDU1MjYwMn0.dAw9bDcdRZkTEBUnk0Ameh8xVqF1R395nU0T5tsZUCw';
     const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
     const form = document.getElementById('uploadForm');
-    const fileInput = document.getElementById('fileInput');
-    const statusMessage = document.getElementById('statusMessage');
+    const status = document.getElementById('statusMessage');
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const file = fileInput.files[0];
+      status.textContent = 'Uploading…';
 
-      if (!file) {
-        statusMessage.textContent = 'Please select a file to upload.';
+      const artistId = document.getElementById('artistId').value.trim();
+      const title    = document.getElementById('title').value.trim();
+      const genre    = document.getElementById('genre').value;
+      const desc     = document.getElementById('description').value.trim();
+      const tags     = document.getElementById('tags').value.trim();
+      const ex       = document.getElementById('exclusive').checked;
+      const audio    = document.getElementById('audioFile').files[0];
+      const cover    = document.getElementById('coverFile').files[0];
+
+      if (!artistId || !title || !genre || !audio || !cover) {
+        status.textContent = 'Please fill all required fields.';
         return;
       }
 
-      const fileName = `${Date.now()}-${file.name}`;
-      statusMessage.textContent = 'Uploading...';
-
-      const { data, error } = await supabase.storage
+      // Upload audio
+      const audioPath = `tracks/${artistId}/${Date.now()}_${audio.name}`;
+      const { data: ad, error: ae } = await supabase
+        .storage
         .from('music-uploads')
-        .upload(fileName, file);
+        .upload(audioPath, audio);
+      if (ae) return status.textContent = 'Audio upload failed: ' + ae.message;
 
-      if (error) {
-        statusMessage.textContent = 'Upload failed: ' + error.message;
-      } else {
-        const { data: publicUrlData } = supabase
-          .storage
-          .from('music-uploads')
-          .getPublicUrl(fileName);
+      // Upload cover
+      const coverPath = `covers/${artistId}/${Date.now()}_${cover.name}`;
+      const { data: cd, error: ce } = await supabase
+        .storage
+        .from('music-uploads')
+        .upload(coverPath, cover);
+      if (ce) return status.textContent = 'Cover upload failed: ' + ce.message;
 
-        statusMessage.innerHTML = `
-          ✅ Uploaded successfully!<br/>
-          <a href="${publicUrlData.publicUrl}" target="_blank">View File</a>
-        `;
-      }
+      // Get public URLs
+      const { publicUrl: audioURL } = supabase
+        .storage
+        .from('music-uploads')
+        .getPublicUrl(ad.path);
+      const { publicUrl: coverURL } = supabase
+        .storage
+        .from('music-uploads')
+        .getPublicUrl(cd.path);
+
+      // Insert record
+      const { error: ie } = await supabase
+        .from('songs')
+        .insert([{
+          artist_id: artistId,
+          title,
+          genre,
+          description: desc,
+          tags,
+          is_exclusive: ex,
+          audio_url: audioURL,
+          cover_image_url: coverURL,
+          likes: 0,
+          created_at: new Date().toISOString()
+        }]);
+      if (ie) return status.textContent = 'DB insert failed: ' + ie.message;
+
+      status.innerHTML = `✅ "${title}" uploaded!<br/><a href="${audioURL}" target="_blank" style="color:#00cfff">Listen</a>`;
+      form.reset();
     });
   </script>
-
 </body>
 </html>

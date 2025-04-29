@@ -2,13 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <title>Upload Your Music | IndieMusic</title>
+  <!-- Supabase JS v2 UMD -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
     body {
       margin: 0;
-      background-color: #121212;
+      background: #121212;
       color: #fff;
       font-family: 'Segoe UI', sans-serif;
       display: flex;
@@ -55,10 +56,6 @@
       font-size: 14px;
     }
     textarea { resize: vertical; }
-    input[type="checkbox"] {
-      width: auto;
-      margin-right: 8px;
-    }
     .btn {
       display: block;
       width: 100%;
@@ -77,7 +74,6 @@
       margin-top: 20px;
       font-size: 14px;
       text-align: center;
-      color: #0f0;
     }
     .spacer { flex: 1; }
   </style>
@@ -90,10 +86,10 @@
     <h2>Tell us about your track</h2>
     <form id="uploadForm">
       <label for="artistName">Your Name</label>
-      <input type="text" id="artistName" placeholder="Artist or your name" required>
+      <input type="text" id="artistName" required placeholder="Artist or your name">
 
       <label for="title">Song Title</label>
-      <input type="text" id="title" placeholder="Enter song title" required>
+      <input type="text" id="title" required placeholder="Enter song title">
 
       <label for="genre">Genre</label>
       <select id="genre" required>
@@ -129,14 +125,15 @@
   <div class="spacer"></div>
 
   <script>
+    // ← Replace with YOUR values
     const SUPABASE_URL = 'https://abgnswmbzulhdkduyezr.supabase.co';
-    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFiZ25zd21ienVsaGRrZHV5ZXpyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQ5NzY2MDIsImV4cCI6MjA2MDU1MjYwMn0.dAw9bDcdRZkTEBUnk0Ameh8xVqF1R395nU0T5tsZUCw';
+    const SUPABASE_KEY = '<eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFiZ25zd21ienVsaGRrZHV5ZXpyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQ5NzY2MDIsImV4cCI6MjA2MDU1MjYwMn0.dAw9bDcdRZkTEBUnk0Ameh8xVqF1R395nU0T5tsZUCw>';
     const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-    const form = document.getElementById('uploadForm');
+    const form   = document.getElementById('uploadForm');
     const status = document.getElementById('statusMessage');
 
-    form.addEventListener('submit', async (e) => {
+    form.addEventListener('submit', async e => {
       e.preventDefault();
       status.style.color = '#fff';
       status.textContent = 'Uploading…';
@@ -152,58 +149,61 @@
 
       if (!artistName || !title || !genre || !audioFile || !coverFile) {
         status.style.color = 'orange';
-        status.textContent = 'Please complete all required fields.';
+        status.textContent = 'Please fill all required fields.';
         return;
       }
 
-      // Upload audio
+      // 1) upload audio to 'tracks' bucket
       const audioPath = `tracks/${Date.now()}_${audioFile.name}`;
-      const { data: audioData, error: audioError } = await supabase
-        .storage.from('music-uploads').upload(audioPath, audioFile);
-      if (audioError) {
+      let { error: err1 } = await supabase
+        .storage.from('tracks')
+        .upload(audioPath, audioFile);
+      if (err1) {
         status.style.color = 'red';
-        status.textContent = 'Audio upload failed: ' + audioError.message;
+        status.textContent = 'Audio upload failed: ' + err1.message;
         return;
       }
 
-      // Upload cover
+      // 2) upload cover to 'covers' bucket
       const coverPath = `covers/${Date.now()}_${coverFile.name}`;
-      const { data: coverData, error: coverError } = await supabase
-        .storage.from('music-uploads').upload(coverPath, coverFile);
-      if (coverError) {
+      let { error: err2 } = await supabase
+        .storage.from('covers')
+        .upload(coverPath, coverFile);
+      if (err2) {
         status.style.color = 'red';
-        status.textContent = 'Cover upload failed: ' + coverError.message;
+        status.textContent = 'Cover upload failed: ' + err2.message;
         return;
       }
 
-      // Get public URLs
-      const { publicUrl: audioURL } = supabase
-        .storage.from('music-uploads').getPublicUrl(audioData.path);
-      const { publicUrl: coverURL } = supabase
-        .storage.from('music-uploads').getPublicUrl(coverData.path);
+      // 3) get public URLs
+      const { data: audioURLData } = supabase
+        .storage.from('tracks')
+        .getPublicUrl(audioPath);
+      const { data: coverURLData } = supabase
+        .storage.from('covers')
+        .getPublicUrl(coverPath);
+      const audioURL = audioURLData.publicUrl;
+      const coverURL = coverURLData.publicUrl;
 
-      // Insert record
-      const { error: dbError } = await supabase
-        .from('songs').insert([{
-          artist_name:      artistName,
-          title,
-          genre,
-          description,
-          tags,
-          is_exclusive:     exclusive,
-          audio_url:        audioURL,
-          cover_image_url:  coverURL,
-          likes:            0,
-          created_at:       new Date().toISOString()
+      // 4) insert record
+      let { error: dbErr } = await supabase
+        .from('songs')
+        .insert([{
+          artist_name, title, genre, description, tags,
+          is_exclusive: exclusive,
+          audio_url:     audioURL,
+          cover_image_url: coverURL,
+          likes: 0
         }]);
-      if (dbError) {
+      if (dbErr) {
         status.style.color = 'red';
-        status.textContent = 'Save failed: ' + dbError.message;
+        status.textContent = 'Save failed: ' + dbErr.message;
         return;
       }
 
       status.style.color = '#0f0';
-      status.innerHTML = `✅ "${title}" uploaded successfully!<br/><a href="${audioURL}" target="_blank" style="color:#00cfff">Play it</a>`;
+      status.innerHTML = `✅ "${title}" uploaded!<br>
+        <a href="${audioURL}" target="_blank" style="color:#00cfff">▶️ Play it</a>`;
       form.reset();
     });
   </script>

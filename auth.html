@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>IndieMusic • Sign In / Sign Up</title>
+  <!-- Supabase JS v2 -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    /* Base */
+    body {
+      margin: 0; padding: 0;
+      background: #121212;
+      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex; align-items: center; justify-content: center;
+      min-height: 100vh;
+    }
+    /* Container */
+    .box {
+      background: #1e1e1e;
+      padding: 2rem;
+      border-radius: 12px;
+      width: 90%; max-width: 400px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+      text-align: center;
+    }
+    h2 {
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+      background: linear-gradient(90deg,#6a00ff,#00cfff);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    /* Inputs */
+    input {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      margin: 0.5rem 0;
+      border: 1px solid #333;
+      border-radius: 8px;
+      background: #2a2a2a;
+      color: #fff;
+      font-size: 1rem;
+    }
+    /* Buttons */
+    button {
+      width: 100%;
+      padding: 0.75rem;
+      margin-top: 1rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      background: linear-gradient(90deg,#6a00ff,#00cfff);
+      color: #fff;
+      transition: opacity 0.2s;
+    }
+    button:hover { opacity: 0.85; }
+    .toggle {
+      background: transparent;
+      color: #aaa;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+      text-decoration: underline;
+    }
+    .message {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: #f55;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="box">
+    <h2 id="formTitle">Sign In to IndieMusic</h2>
+
+    <input id="email"    type="email"    placeholder="Email address"    required />
+    <input id="password" type="password" placeholder="Password"         required />
+
+    <button id="submitBtn">Sign In</button>
+    <div class="toggle" id="toggleBtn">Or, Create an Account</div>
+    <div class="message" id="msg"></div>
+  </div>
+
+  <script>
+    // ← REPLACE with YOUR Supabase project's values
+    const SUPA_URL = 'https://<YOUR-PROJECT-REF>.supabase.co';
+    const SUPA_KEY = '<YOUR-ANON-KEY>';
+    const supabase = supabase.createClient(SUPA_URL, SUPA_KEY);
+
+    const formTitle = document.getElementById('formTitle');
+    const toggleBtn = document.getElementById('toggleBtn');
+    const submitBtn = document.getElementById('submitBtn');
+    const msg       = document.getElementById('msg');
+    let isSignIn   = true;
+
+    // Switch between Sign In / Sign Up
+    toggleBtn.addEventListener('click', () => {
+      isSignIn = !isSignIn;
+      formTitle.textContent = isSignIn ? 'Sign In to IndieMusic' : 'Create Your IndieMusic Account';
+      submitBtn.textContent = isSignIn ? 'Sign In' : 'Sign Up';
+      toggleBtn.textContent = isSignIn ? 'Or, Create an Account' : 'Or, Sign In Instead';
+      msg.textContent = '';
+    });
+
+    // Handle form submit
+    submitBtn.addEventListener('click', async () => {
+      msg.textContent = '';
+      const email    = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      if (!email || !password) {
+        msg.textContent = 'Email & password required.';
+        return;
+      }
+
+      if (isSignIn) {
+        // Sign In
+        const { error } = await supabase.auth.signInWithPassword({ email, password });
+        if (error) {
+          msg.textContent = error.message;
+        } else {
+          window.location.href = '/'; // redirect to homepage
+        }
+      } else {
+        // Sign Up
+        const { error } = await supabase.auth.signUp({ email, password });
+        if (error) {
+          msg.textContent = error.message;
+        } else {
+          msg.style.color = '#0f0';
+          msg.textContent = 'Check your email to confirm!';
+        }
+      }
+    });
+
+    // Auto-redirect if already logged in
+    supabase.auth.onAuthStateChange((_, session) => {
+      if (session) window.location.href = '/';
+    });
+  </script>
+</body>
+</html>

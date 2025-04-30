@@ -2,144 +2,159 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>IndieMusic • Sign In / Sign Up</title>
-  <!-- Supabase JS v2 -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
-    /* Base */
+    /* Page Reset & Layout */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      margin: 0; padding: 0;
       background: #121212;
       color: #fff;
       font-family: 'Segoe UI', sans-serif;
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       min-height: 100vh;
     }
-    /* Container */
-    .box {
+    /* Card */
+    .auth-card {
       background: #1e1e1e;
       padding: 2rem;
-      border-radius: 12px;
-      width: 90%; max-width: 400px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.6);
-      text-align: center;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 380px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
     }
-    h2 {
-      margin-bottom: 1rem;
-      font-size: 1.5rem;
-      background: linear-gradient(90deg,#6a00ff,#00cfff);
+    .auth-card h2 {
+      font-size: 1.6rem;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(90deg, #6a11cb, #2575fc);
       -webkit-background-clip: text;
       color: transparent;
     }
-    /* Inputs */
+    /* Forms */
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
     input {
-      width: 100%;
       padding: 0.75rem 1rem;
-      margin: 0.5rem 0;
-      border: 1px solid #333;
-      border-radius: 8px;
+      border: none;
+      border-radius: 6px;
       background: #2a2a2a;
       color: #fff;
       font-size: 1rem;
     }
-    /* Buttons */
+    input::placeholder { color: #aaa; }
     button {
-      width: 100%;
       padding: 0.75rem;
-      margin-top: 1rem;
       border: none;
-      border-radius: 8px;
-      font-size: 1rem;
-      cursor: pointer;
-      background: linear-gradient(90deg,#6a00ff,#00cfff);
+      border-radius: 6px;
+      background: linear-gradient(90deg, #6a11cb, #2575fc);
       color: #fff;
-      transition: opacity 0.2s;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.3s;
     }
     button:hover { opacity: 0.85; }
-    .toggle {
-      background: transparent;
-      color: #aaa;
+    .toggle-text {
+      text-align: center;
       font-size: 0.9rem;
-      margin-top: 0.5rem;
-      text-decoration: underline;
+      color: #ccc;
     }
-    .message {
-      margin-top: 1rem;
-      font-size: 0.9rem;
+    .toggle-text a {
+      color: #6a11cb;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .toggle-text a:hover { text-decoration: underline; }
+    .error-text {
       color: #f55;
+      font-size: 0.85rem;
+      text-align: center;
+      min-height: 1em;
     }
   </style>
 </head>
 <body>
 
-  <div class="box">
-    <h2 id="formTitle">Sign In to IndieMusic</h2>
+  <div class="auth-card">
+    <h2 id="auth-title">Sign In to IndieMusic</h2>
 
-    <input id="email"    type="email"    placeholder="Email address"    required />
-    <input id="password" type="password" placeholder="Password"         required />
+    <!-- Sign In Form -->
+    <form id="signin-form">
+      <input type="email" id="signin-email" placeholder="Email address" required />
+      <input type="password" id="signin-password" placeholder="Password" required />
+      <button type="submit">Sign In</button>
+      <p class="toggle-text">Or <a href="#" id="show-signup">create an account</a></p>
+      <p id="signin-error" class="error-text"></p>
+    </form>
 
-    <button id="submitBtn">Sign In</button>
-    <div class="toggle" id="toggleBtn">Or, Create an Account</div>
-    <div class="message" id="msg"></div>
+    <!-- Sign Up Form -->
+    <form id="signup-form" style="display: none;">
+      <input type="email" id="signup-email" placeholder="Email address" required />
+      <input type="password" id="signup-password" placeholder="Password" required />
+      <input type="password" id="signup-confirm-password" placeholder="Confirm password" required />
+      <button type="submit">Create Account</button>
+      <p class="toggle-text">Or <a href="#" id="show-signin">sign in</a></p>
+      <p id="signup-error" class="error-text"></p>
+    </form>
   </div>
 
   <script>
-    // ← REPLACE with YOUR Supabase project's values
-    const SUPA_URL = 'https://abgnswmbzulhdkduyezr.supabase.co';
-    const SUPA_KEY = '<eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFiZ25zd21ienVsaGRrZHV5ZXpyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQ5NzY2MDIsImV4cCI6MjA2MDU1MjYwMn0.dAw9bDcdRZkTEBUnk0Ameh8xVqF1R395nU0T5tsZUCw>';
-    const supabase = supabase.createClient(SUPA_URL, SUPA_KEY);
+    // Initialize Supabase client
+    const SUPABASE_URL = 'https://abgnswmbzulhdkduyezr.supabase.co';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFiZ25zd21ienVsaGRrZHV5ZXpyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQ5NzY2MDIsImV4cCI6MjA2MDU1MjYwMn0.dAw9bDcdRZkTEBUnk0Ameh8xVqF1R395nU0T5tsZUCw';
+    const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-    const formTitle = document.getElementById('formTitle');
-    const toggleBtn = document.getElementById('toggleBtn');
-    const submitBtn = document.getElementById('submitBtn');
-    const msg       = document.getElementById('msg');
-    let isSignIn   = true;
+    // Element refs
+    const signinForm = document.getElementById('signin-form');
+    const signupForm = document.getElementById('signup-form');
+    const authTitle = document.getElementById('auth-title');
+    const signinError = document.getElementById('signin-error');
+    const signupError = document.getElementById('signup-error');
+    document.getElementById('show-signup').onclick = e => { e.preventDefault(); toggleForms(); };
+    document.getElementById('show-signin').onclick = e => { e.preventDefault(); toggleForms(); };
 
-    // Switch between Sign In / Sign Up
-    toggleBtn.addEventListener('click', () => {
-      isSignIn = !isSignIn;
-      formTitle.textContent = isSignIn ? 'Sign In to IndieMusic' : 'Create Your IndieMusic Account';
-      submitBtn.textContent = isSignIn ? 'Sign In' : 'Sign Up';
-      toggleBtn.textContent = isSignIn ? 'Or, Create an Account' : 'Or, Sign In Instead';
-      msg.textContent = '';
+    function toggleForms() {
+      const showSignup = signinForm.style.display !== 'none';
+      signinForm.style.display = showSignup ? 'none' : 'flex';
+      signupForm.style.display = showSignup ? 'flex' : 'none';
+      authTitle.textContent = showSignup ? 'Create an IndieMusic Account' : 'Sign In to IndieMusic';
+      signinError.textContent = signupError.textContent = '';
+    }
+
+    // Sign In Handler
+    signinForm.addEventListener('submit', async e => {
+      e.preventDefault();
+      signinError.textContent = '';
+      const email = document.getElementById('signin-email').value;
+      const password = document.getElementById('signin-password').value;
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      if (error) signinError.textContent = error.message;
+      else window.location.href = 'index.html';
     });
 
-    // Handle form submit
-    submitBtn.addEventListener('click', async () => {
-      msg.textContent = '';
-      const email    = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
-
-      if (!email || !password) {
-        msg.textContent = 'Email & password required.';
+    // Sign Up Handler
+    signupForm.addEventListener('submit', async e => {
+      e.preventDefault();
+      signupError.textContent = '';
+      const email = document.getElementById('signup-email').value;
+      const password = document.getElementById('signup-password').value;
+      const confirm = document.getElementById('signup-confirm-password').value;
+      if (password !== confirm) {
+        signupError.textContent = 'Passwords do not match.';
         return;
       }
-
-      if (isSignIn) {
-        // Sign In
-        const { error } = await supabase.auth.signInWithPassword({ email, password });
-        if (error) {
-          msg.textContent = error.message;
-        } else {
-          window.location.href = '/'; // redirect to homepage
-        }
-      } else {
-        // Sign Up
-        const { error } = await supabase.auth.signUp({ email, password });
-        if (error) {
-          msg.textContent = error.message;
-        } else {
-          msg.style.color = '#0f0';
-          msg.textContent = 'Check your email to confirm!';
-        }
-      }
-    });
-
-    // Auto-redirect if already logged in
-    supabase.auth.onAuthStateChange((_, session) => {
-      if (session) window.location.href = '/';
+      const { error } = await supabase.auth.signUp({ email, password });
+      if (error) signupError.textContent = error.message;
+      else window.location.href = 'index.html';
     });
   </script>
+
 </body>
 </html>
